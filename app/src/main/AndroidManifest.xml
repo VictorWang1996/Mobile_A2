@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".me.ContainerActivity"></activity>
+        <activity android:name=".imageTest.GridImageActivity"></activity>
+        <activity android:name=".me.ContainerActivity" />
         <activity android:name=".ReadImageActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LogInActivity" />

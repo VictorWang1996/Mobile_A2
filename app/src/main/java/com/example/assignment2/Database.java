@@ -75,55 +75,6 @@ public class Database {
 
     }
 
-    public static void updateUser(final Post post){
-        FirebaseUser user = mAuth.getCurrentUser();
-        ValueEventListener userListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()){
-                  User temp_user = dataSnapshot.getValue(User.class);
-                  temp_user.addPost(post);
-//                  Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
-                  update(temp_user);
-                }
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-        mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
-
-    }
-
-    public static void updateUser(final User update_user){
-        FirebaseUser user = mAuth.getCurrentUser();
-        ValueEventListener userListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()){
-                    update(update_user);
-                }
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-        mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
-
-    }
-
     public static void loadCurrentUser(final TextView tv_name, final TextView tv_sex, final TextView tv_age,
                                        final TextView tv_email, final TextView tv_location, Activity activity){
         FirebaseUser user = Database.mAuth.getCurrentUser();
@@ -168,15 +119,16 @@ public class Database {
     }
 
 
-    public static void createPosts(final Post post){
-//        FirebaseUser user = mAuth.getCurrentUser();
-        ValueEventListener userListener = new ValueEventListener() {
+
+    public static void loadPosts(){
+//        final FirebaseUser user = mAuth.getCurrentUser();
+        ValueEventListener postsListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.exists()){
-//                  Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
-                  update(post);
+                if(dataSnapshot.exists()){
+                    //dataSnapshot.getValue() get a hashMap type
+                    Log.d("Type:",dataSnapshot.getValue().getClass().toString());
                 }
                 // ...
             }
@@ -188,11 +140,9 @@ public class Database {
                 // ...
             }
         };
-        mFdatabase.child("posts").child(post.postID).addListenerForSingleValueEvent(userListener);
+        mFdatabase.child("posts").addListenerForSingleValueEvent(postsListener);
 
     }
-
-
 
     public static void update(User user){
         mFdatabase.child("users").child(user.id).setValue(user);
@@ -202,7 +152,7 @@ public class Database {
         mFdatabase.child("posts").child(post.postID).setValue(post);
     }
 
-    public static void download_image(String image_name, final Activity activity, final ImageView image){
+    public static void download_image(String image_name, final Context activity, final ImageView image){
 
         mStorageRef.child("posts/"+image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

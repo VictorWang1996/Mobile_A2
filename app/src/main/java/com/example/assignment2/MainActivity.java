@@ -3,11 +3,13 @@ package com.example.assignment2;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.assignment2.imageTest.GridImageActivity;
 import com.example.assignment2.me.ContainerActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnLogIn;
     private Button btnImg;
     private Button btnMe;
+    private Button btnGridImage;
     private Button test;
     private ImageView test_img;
     @Override
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         test = findViewById(R.id.btn_test);
         test.setOnClickListener(this);
         test_img = findViewById(R.id.test_image);
+        btnGridImage = findViewById(R.id.btn_gridImage);
+        btnGridImage.setOnClickListener(this);
 //        test_img.setOnClickListener(this);
     }
 
@@ -53,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) test.getLayoutParams();
                 params.setMargins(0,0,0,250);
                 test.setLayoutParams(params);
+                break;
+            case R.id.btn_gridImage:
+                Intent toGridImage = new Intent(MainActivity.this, GridImageActivity.class);
+                startActivity(toGridImage);
                 break;
         }
     }
