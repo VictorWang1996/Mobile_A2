@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radiobtn_me"
+        android:text="me"
+        android:textSize="30sp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"/>
+    <fragment
+        android:name="com.example.assignment2.me.MeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_fragment"
+        android:layout_alignTop="@+id/radiobtn_me"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/radiobtn_me"/>
+
+</RelativeLayout>
