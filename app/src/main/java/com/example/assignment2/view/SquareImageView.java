@@ -1,4 +1,4 @@
-package com.example.assignment2.imageTest;
+package com.example.assignment2.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

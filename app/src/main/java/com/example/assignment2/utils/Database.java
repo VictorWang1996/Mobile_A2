@@ -22,12 +22,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Database {
     private static FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
@@ -35,6 +40,7 @@ public class Database {
     private static StorageReference mStorageRef = mfirebaseStorage.getReference();
     public static DatabaseReference mFdatabase = mfirebaseDatabase.getReference();
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public static List<PostEntity> postList;
 
 
     public static FirebaseStorage getMfirebaseStorage(){
@@ -146,17 +152,25 @@ public class Database {
 
     public static void loadPosts(){
 //        final FirebaseUser user = mAuth.getCurrentUser();
+        postList = new ArrayList<>();
         ValueEventListener postsListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()){
                     //dataSnapshot.getValue() get a hashMap type
+                    //Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue(Map.class);
+                    GenericTypeIndicator<Map<String, PostEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, PostEntity>>() {};
+                    Map<String, PostEntity> map = dataSnapshot.getValue(genericTypeIndicator);
+                    Log.e("Map size", String.valueOf(map.size()));
+                    for(PostEntity key:map.values()){
+                        postList.add(key);
+                        Log.e("Add", String.valueOf(postList.size()));
+                    }
                     Log.d("Type:",dataSnapshot.getValue().getClass().toString());
                 }
                 // ...
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
@@ -165,7 +179,7 @@ public class Database {
             }
         };
         mFdatabase.child("posts").addListenerForSingleValueEvent(postsListener);
-
+        Log.e(" Post size", String.valueOf(postList.size()));
     }
 
     public static void update(UserEntity user){
@@ -178,7 +192,7 @@ public class Database {
 
     public static void download_image(String image_name, final Context activity, final ImageView image){
 
-        mStorageRef.child("posts/"+image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        mStorageRef.child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
@@ -193,7 +207,6 @@ public class Database {
                 // Handle any errors
             }
         });
-
     }
 
     public static void download_image(String image_name, final Activity activity, final ImageView image, UserEntity user){

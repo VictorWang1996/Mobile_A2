@@ -113,7 +113,7 @@ public class EmotionData {
         EMOTION_CLASSIC_MAP.put("[怄火]", R.drawable.expression_95);
         EMOTION_CLASSIC_MAP.put("[转圈]", R.drawable.expression_96);
 
-        // 编码参考 http://www.oicqzone.com/tool/emoji/
+        // reference http://www.oicqzone.com/tool/emoji/
 
         EMOTION_CLASSIC_MAP.put(emojiString(0x1F604), R.drawable.expression_97);
         EMOTION_CLASSIC_MAP.put(emojiString(0x1F637), R.drawable.expression_98);

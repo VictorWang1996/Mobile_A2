@@ -48,14 +48,41 @@
             </RelativeLayout>
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/post_content"
+        <TextView
+            android:id="@+id/postContent"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="187dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorShadowPink"/>
-
+            android:layout_height="wrap_content"/>
+        <GridLayout
+            android:id="@+id/gridlayout_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingLeft="-4.5dp"
+            android:paddingRight="-4.5dp"
+            android:columnCount="3"
+            android:visibility="gone">
+            <com.example.assignment2.view.SquareImageView
+                android:layout_width="0dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:layout_columnWeight="1"
+                android:src="@color/cardview_dark_background"/>
+            <com.example.assignment2.view.SquareImageView
+                android:layout_width="0dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:layout_columnWeight="1"
+                android:src="@color/cardview_dark_background"/>
+            <com.example.assignment2.view.SquareImageView
+                android:layout_width="0dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:layout_columnWeight="1"
+                android:src="@color/cardview_dark_background"/>
+        </GridLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

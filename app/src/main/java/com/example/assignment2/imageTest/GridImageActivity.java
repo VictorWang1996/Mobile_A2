@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.assignment2.utils.Database;
 import com.example.assignment2.R;
+import com.example.assignment2.view.SquareImageView;
 
 public class GridImageActivity extends AppCompatActivity {
     private GridLayout gridlayoutPost;

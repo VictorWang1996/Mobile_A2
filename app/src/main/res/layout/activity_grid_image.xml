@@ -7,19 +7,19 @@
     android:paddingLeft="-4.5dp"
     android:paddingRight="-4.5dp"
     android:columnCount="3">
-    <com.example.assignment2.imageTest.SquareImageView
+    <com.example.assignment2.view.SquareImageView
         android:layout_width="0dp"
         android:layout_margin="4dp"
         android:scaleType="centerCrop"
         android:layout_columnWeight="1"
         android:src="@color/cardview_dark_background"/>
-    <com.example.assignment2.imageTest.SquareImageView
+    <com.example.assignment2.view.SquareImageView
         android:layout_width="0dp"
         android:layout_margin="4dp"
         android:scaleType="centerCrop"
         android:layout_columnWeight="1"
         android:src="@color/cardview_dark_background"/>
-    <com.example.assignment2.imageTest.SquareImageView
+    <com.example.assignment2.view.SquareImageView
         android:layout_width="0dp"
         android:layout_margin="4dp"
         android:scaleType="centerCrop"

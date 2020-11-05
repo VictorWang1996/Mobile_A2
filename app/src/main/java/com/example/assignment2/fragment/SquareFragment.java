@@ -2,6 +2,7 @@ package com.example.assignment2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.assignment2.R;
 import com.example.assignment2.activity.SendPostActivity;
 import com.example.assignment2.adapter.PostAdapter;
 import com.example.assignment2.entity.PostEntity;
+import com.example.assignment2.utils.Database;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class SquareFragment extends Fragment implements View.OnClickListener {
 
@@ -34,20 +42,48 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(linearLayoutManager);
-        List<PostEntity> posts = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            PostEntity pe = new PostEntity();
-            pe.setUserID("Whatever");
-            pe.setPostTime("2020-11-03");
-            pe.setCollectCount(i*2);
-            pe.setCommentCount(i*3);
-            pe.setLikeCount(i*4);
-            posts.add(pe);
-        }
-        PostAdapter postAdapter = new PostAdapter(getActivity(),posts);
-        mRecyclerview.setAdapter(postAdapter);
+
+
+          loadPosts();
+//        Log.e("Pull post", String.valueOf(posts.size()));
+//        PostAdapter postAdapter = new PostAdapter(getActivity(),posts);
+//        mRecyclerview.setAdapter(postAdapter);
         setClickListener();
         return view;
+    }
+
+    private void loadPosts(){
+        ValueEventListener postsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    //dataSnapshot.getValue() get a hashMap type
+                    //Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue(Map.class);
+                    GenericTypeIndicator<Map<String, PostEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, PostEntity>>() {};
+                    Map<String, PostEntity> map = dataSnapshot.getValue(genericTypeIndicator);
+                    List<PostEntity> posts = new ArrayList<>();
+                    for(PostEntity key:map.values()){
+                        posts.add(key);
+                        Log.e("Add", String.valueOf(posts.size()));
+                    }
+                    Collections.sort(posts, new Comparator<PostEntity>() {
+                        @Override
+                        public int compare(PostEntity postEntity, PostEntity t1) {
+                            return -postEntity.getPostTime().compareTo(t1.getPostTime());
+                        }
+                    });
+                    PostAdapter postAdapter = new PostAdapter(getActivity(),posts);
+                    mRecyclerview.setAdapter(postAdapter);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        Database.mFdatabase.child("posts").addListenerForSingleValueEvent(postsListener);
+
     }
 
     private void setClickListener(){

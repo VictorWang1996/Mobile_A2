@@ -77,12 +77,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag_me, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(R.layout.frag_me, container, false);
         tv_name = view.findViewById(R.id.tv_name);
         tv_sex = view.findViewById(R.id.tv_sex);
         tv_age = view.findViewById(R.id.tv_age);
@@ -90,6 +85,12 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         tv_location = view.findViewById(R.id.tv_location);
         img_edit = view.findViewById((R.id.img_header));
         Database.loadCurrentUser(tv_name, tv_sex, tv_age, tv_email, tv_location, getActivity());
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 //        if (loadUser == null) {
 //            Toast.makeText(getActivity(),"no user",Toast.LENGTH_SHORT).show();
 //        }
