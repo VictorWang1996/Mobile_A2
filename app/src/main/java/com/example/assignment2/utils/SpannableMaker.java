@@ -16,20 +16,6 @@ public class SpannableMaker {
     private static Pattern sPatternEmotion =
             Pattern.compile("\\[([\u4e00-\u9fa5\\w])+\\]|[\\ud83c\\udc00-\\ud83c\\udfff]|[\\ud83d\\udc00-\\ud83d\\udfff]|[\\u2600-\\u27ff]");
 
-    public static Spannable getEmojiString(Context context, String text, int textSize){
-        Matcher matcherEmotion = sPatternEmotion.matcher(text);
-        SpannableString spannableString = new SpannableString(text);
-        while (matcherEmotion.find()) {
-            String key = matcherEmotion.group(0);
-            int imgRes = EmotionData.getImgByName(key);
-            if (imgRes != -1) {
-                int start = matcherEmotion.start();
-                ImageSpan span = createImageSpanByRes(imgRes, context, textSize);
-                spannableString.setSpan(span, start, start + key.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-        return spannableString;
-    }
     public static Spannable buildEmotionSpannable(Context context, String text, int textSize) {
 
         Matcher matcherEmotion = sPatternEmotion.matcher(text);

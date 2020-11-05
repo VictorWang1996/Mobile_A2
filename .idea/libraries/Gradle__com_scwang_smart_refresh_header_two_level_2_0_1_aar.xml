@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.scwang.smart:refresh-header-two-level:2.0.1@aar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/7a4b9d4e5ffcf62b5a8fca98c167fbcf/jetified-refresh-header-two-level-2.0.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/7a4b9d4e5ffcf62b5a8fca98c167fbcf/jetified-refresh-header-two-level-2.0.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/7a4b9d4e5ffcf62b5a8fca98c167fbcf/jetified-refresh-header-two-level-2.0.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-header-two-level/2.0.1/61e4dd2408f09216313bee4d8dea549d31af67bb/refresh-header-two-level-2.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-header-two-level/2.0.1/301e9b12574442da0abafc415814b39ec7b767cb/refresh-header-two-level-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -22,6 +22,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.scwang.smart.refresh.footer.BallPulseFooter;
+import com.scwang.smart.refresh.header.BezierRadarHeader;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,21 +40,32 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
 
     private ImageButton btn_sendPost;
     private RecyclerView mRecyclerview;
+    private SmartRefreshLayout mRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_square,container,false);
         btn_sendPost = view.findViewById(R.id.btn_sendpost);
         mRecyclerview = view.findViewById(R.id.recyclerview);
+        mRefreshLayout = view.findViewById(R.id.refreshlayout);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mRefreshLayout.finishRefresh(2000/*,false*/);
+                loadPosts();
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                mRefreshLayout.finishLoadMore(2000/*,false*/);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(linearLayoutManager);
 
-
-          loadPosts();
-//        Log.e("Pull post", String.valueOf(posts.size()));
-//        PostAdapter postAdapter = new PostAdapter(getActivity(),posts);
-//        mRecyclerview.setAdapter(postAdapter);
+        loadPosts();
         setClickListener();
         return view;
     }
