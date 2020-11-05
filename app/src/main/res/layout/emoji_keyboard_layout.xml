@@ -47,11 +47,15 @@
         android:layout_below="@+id/bot_bar"
         android:visibility="gone"
         >
-        <ImageView
-            android:id="@+id/iv_image"
+        <GridView
+            android:id="@+id/grid_emoji_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorAccent"
-            android:scaleType="centerCrop"/>
+            android:numColumns="7"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="2dp"
+            android:padding="10dp"
+            android:clipToPadding="false"
+            />
     </RelativeLayout>
 </RelativeLayout>

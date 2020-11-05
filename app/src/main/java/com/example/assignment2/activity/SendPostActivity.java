@@ -6,9 +6,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.Spannable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,7 +29,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignment2.R;
 import com.example.assignment2.adapter.ImageAdapter;
+import com.example.assignment2.utils.EmotionData;
 import com.example.assignment2.utils.EmotionInputDetector;
+import com.example.assignment2.utils.Note;
+import com.example.assignment2.utils.SpannableMaker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,6 +58,7 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
     public List<Uri> imageUris;
     ImageAdapter mImageAdapter;
     GridLayoutManager gridLayoutManager;
+    private List<Note> mNote = EmotionData.getNotes();
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +98,26 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         mRvEditImage.setAdapter(mImageAdapter);
+        // set emoji keyboard
+        GridView gridView = findViewById(R.id.grid_emoji_view);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Note note = (Note)adapterView.getAdapter().getItem(i);
+
+                EditText editText = content;
+
+                int start = editText.getSelectionStart();
+
+                Editable editable = editText.getEditableText();
+
+                Spannable spannable = SpannableMaker.buildEmotionSpannable(SendPostActivity.this, note.getText(), (int)editText.getTextSize());
+
+                editable.insert(start, spannable);
+            }
+        });
+        gridView.setAdapter(new EmojiGridViewAdapter());
+
         mDetector = EmotionInputDetector.with(this)
                 .setEmotionView(findViewById(R.id.emoji_keyboard))
                 .bindToContent(findViewById(R.id.content_view))
@@ -240,4 +270,31 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+    private class EmojiGridViewAdapter extends BaseAdapter {
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            if (!(view instanceof ImageView)) {
+                view = new ImageView(SendPostActivity.this);
+            }
+            ImageView imageView = (ImageView) view;
+            imageView.setImageResource(((Note) getItem(position)).getIconRes());
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return mNote.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mNote.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+    }
+
 }
