@@ -11,7 +11,6 @@ public class EmotionData {
 
 	static {
         EMOTION_CLASSIC_MAP = new LinkedHashMap<>();
-
         EMOTION_CLASSIC_MAP.put("[微笑]", R.drawable.expression_1);
         EMOTION_CLASSIC_MAP.put("[撇嘴]", R.drawable.expression_2);
         EMOTION_CLASSIC_MAP.put("[色]", R.drawable.expression_3);

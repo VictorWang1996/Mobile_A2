@@ -1,6 +1,8 @@
 package com.example.assignment2.adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignment2.R;
+import com.example.assignment2.activity.SendPostActivity;
 import com.example.assignment2.entity.PostEntity;
+import com.example.assignment2.utils.SpannableMaker;
 import com.example.assignment2.view.SquareImageView;
 import com.example.assignment2.utils.Database;
 
@@ -45,7 +49,8 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     vh.tvCollect.setText(String.valueOf(postEntity.getCollectCount()));
     vh.tvLike.setText(String.valueOf(postEntity.getLikeCount()));
     if(postEntity.getPostText()!=null && postEntity.getPostText()!="") {
-        vh.tvPostContent.setText(postEntity.getPostText());
+        Spannable spannable = SpannableMaker.buildEmotionSpannable(mContext, postEntity.getPostText(), (int)vh.tvPostContent.getTextSize());
+        vh.tvPostContent.setText(spannable);
         vh.tvPostContent.setVisibility(View.VISIBLE);
     }
         int columnCount= vh.gridLayout.getColumnCount();//get column
