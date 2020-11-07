@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment;
 import com.example.assignment2.R;
 
 public class SearchFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_search,container,false);
-        TextView textView = view.findViewById(R.id.txt_content);
+//        TextView textView = view.findViewById(R.id.txt_content);
         //textView.setText("第一个Fragment");
         return view;
     }

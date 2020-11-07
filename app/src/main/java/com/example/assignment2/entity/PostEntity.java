@@ -9,6 +9,7 @@ public class PostEntity implements Serializable {
     private String userID;
     private String postTime;
     private String postText;
+    private String header;
     private int likeCount;
     private int collectCount;
     private int commentCount;
@@ -25,13 +26,14 @@ public class PostEntity implements Serializable {
 
     public PostEntity(){
     }
-    public PostEntity(String postID,String userID,String postTime, String postText, String location, List<String> postImgPath){
+    public PostEntity(String postID,String userID,String postTime, String postText, String location, String header, List<String> postImgPath){
         this.postImgPath = new ArrayList<>();
         this.postID = postID;
         this.userID = userID;
         this.postTime = postTime;
         this.postText = postText;
         this.location = location;
+        this.header = header;
         this.postImgPath = postImgPath;
 
         likeCount = 0;
@@ -99,5 +101,13 @@ public class PostEntity implements Serializable {
 
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public String getHeader(){
+        return header;
+    }
+
+    public void setHeader(String header){
+        this.header = header;
     }
 }

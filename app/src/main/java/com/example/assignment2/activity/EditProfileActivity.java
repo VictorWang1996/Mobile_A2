@@ -24,6 +24,7 @@ import androidx.core.content.FileProvider;
 
 import com.example.assignment2.R;
 import com.example.assignment2.adapter.ImageAdapter;
+import com.example.assignment2.entity.PostEntity;
 import com.example.assignment2.entity.UserEntity;
 import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.utils.Database;
@@ -32,7 +33,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 
@@ -72,7 +75,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         camera = findViewById(R.id.ed_camera);
         camera.setOnClickListener(this);
 //        UserEntity user = new UserEntity(MeFragment.currentuser);
-        if(!MeFragment.currentuser.getHeader().equals("")&&MeFragment.currentuser.getHeader()!=null){
+        if(MeFragment.currentuser.getHeader()!=null&&!MeFragment.currentuser.getHeader().equals("")){
             Database.download_image(MeFragment.currentuser.getHeader(),EditProfileActivity.this,image);
 
         }
@@ -188,6 +191,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         Database.upload_header(imguri,EditProfileActivity.this);
         Database.update(MeFragment.currentuser);
         Toast.makeText(EditProfileActivity.this,"Update",Toast.LENGTH_SHORT).show();
+        List<PostEntity> userposts = new ArrayList<>();
+        userposts = MeFragment.currentuser.postList;
+        for(PostEntity post : userposts){
+            post.setHeader(MeFragment.currentuser.getHeader());
+            post.setUserID(name.getText().toString());
+            Database.update(post);
+        }
     }
 
     @Override

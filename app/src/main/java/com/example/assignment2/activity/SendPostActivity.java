@@ -87,6 +87,9 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_send_post);
         init();
         setOnClickListener();
+       grantPermission();
+       checkLocationEnabled();
+       getLocation();
         //getWindow().setSoftInputMode(getWindowManager().LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
     private void init(){
@@ -170,9 +173,7 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_send:
                 try {
-                    grantPermission();
-                    checkLocationEnabled();
-                    getLocation();
+
                     sendPost();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -204,10 +205,12 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
 //        grantPermission();
 //        checkLocationEnabled();
 //        getLocation();
-        PostEntity post = new PostEntity(Database.mAuth.getUid()+"-"+postTime, MeFragment.currentuser.getUsername(), postTime,postText,address,cloudPath);
+        PostEntity post = new PostEntity(Database.mAuth.getUid()+"-"+postTime, MeFragment.currentuser.getUsername(), postTime,postText,this.address,MeFragment.currentuser.getHeader(),cloudPath);
         Log.e("Send list", String.valueOf(post.getPostImgPath().size()));
+        Log.e("test1",this.address);
         Database.update(post);
         MeFragment.currentuser.addPost(post);
+        Log.e("test2",post.getLocation());
         Database.update(MeFragment.currentuser);
         imageUris.clear();
         Toast.makeText(SendPostActivity.this,"already send",Toast.LENGTH_SHORT).show();
@@ -361,6 +364,7 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 String locality  = addressList.get(0).getLocality();
                 this.address = country+", "+adminArea+", "+locality;
                 Log.e("L",this.address);
+                System.out.println(this.address);
 //                tvState.setText(addressList.get(0).getAdminArea() );
 //                tvCity.setText(addressList.get(0).getLocality());
 //                tvPin.setText(addressList.get(0).getPostalCode());

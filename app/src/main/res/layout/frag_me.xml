@@ -11,13 +11,14 @@
         android:id="@+id/user_rl_title">
         <TextView
             android:id="@+id/txt_topbar"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center_horizontal"
             android:textSize="18sp"
             android:textColor="@color/colorAccent"
-            android:text="Profile"/>
+            android:text="Me"
+            android:textStyle="bold"/>
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -98,8 +99,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_location"
             android:visibility="gone"/>
-
-
 
     </LinearLayout>
 

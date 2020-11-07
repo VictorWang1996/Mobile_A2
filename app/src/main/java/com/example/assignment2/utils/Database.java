@@ -131,7 +131,7 @@ public class Database {
                     tv_name.setText(MeFragment.currentuser.username);
                     tv_email.setText(MeFragment.currentuser.email);
                     Log.e("Database",MeFragment.currentuser.getHeader());
-                    if(!MeFragment.currentuser.getHeader().equals("") && MeFragment.currentuser.getHeader()!=null){
+                    if(MeFragment.currentuser.getHeader()!=null&&!MeFragment.currentuser.getHeader().equals("")){
                         Database.download_image(MeFragment.currentuser.getHeader(),activity,img_header);
                         Log.e("Database",MeFragment.currentuser.getHeader());
                     }
@@ -246,7 +246,6 @@ public class Database {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Glide.with(activity).load(uri).into(image);
-                Toast.makeText(activity,"load success",Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {

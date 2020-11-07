@@ -3,6 +3,7 @@ package com.example.assignment2.adapter;
 import android.content.Context;
 import android.text.Editable;
 import android.text.Spannable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.assignment2.R;
 import com.example.assignment2.activity.SendPostActivity;
 import com.example.assignment2.entity.PostEntity;
+import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.utils.SpannableMaker;
 import com.example.assignment2.view.SquareImageView;
 import com.example.assignment2.utils.Database;
@@ -48,9 +50,18 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         vh.tvComment.setText(String.valueOf(postEntity.getCommentCount()));
         vh.tvCollect.setText(String.valueOf(postEntity.getCollectCount()));
         vh.tvLike.setText(String.valueOf(postEntity.getLikeCount()));
-        vh.tvLocation.setText(String.valueOf(postEntity.getLocation()));
-        vh.tvLocation.setVisibility(View.VISIBLE);
-        if(postEntity.getPostText()!=null && postEntity.getPostText()!="") {
+//        Log.e("Location", postEntity.getLocation());
+        if(postEntity.getLocation()!=null&&!postEntity.getLocation().equals("")){
+            vh.tvLocation.setVisibility(View.VISIBLE);
+            vh.tvLocation.setText(postEntity.getLocation());
+//            Log.e("Location2",vh.tvLocation.getText().toString());
+        }
+
+        if(postEntity.getHeader()!=null && !postEntity.getHeader().equals("")){
+            Database.download_image(postEntity.getHeader(),mContext,vh.ivHeader);
+            Log.e("Database",postEntity.getHeader());
+        }
+        if(postEntity.getPostText()!=null && !postEntity.getPostText().equals("")) {
             Spannable spannable = SpannableMaker.buildEmotionSpannable(mContext, postEntity.getPostText(), (int)vh.tvPostContent.getTextSize());
             vh.tvPostContent.setText(spannable);
             vh.tvPostContent.setVisibility(View.VISIBLE);
