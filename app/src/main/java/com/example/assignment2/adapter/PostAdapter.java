@@ -68,15 +68,22 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         int columnCount= vh.gridLayout.getColumnCount();//get column
 //        int marginSize = PixelUtils.dp2px(mContext, 4);//得到经过dp转化的margin值
-        //遍历集合 动态添加
     if (postEntity.getPostImgPath()!=null && postEntity.getPostImgPath().size()!=0){
 
         for (int i = 0; i < postEntity.getPostImgPath().size(); i++) {
-            GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
+            GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//rows
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             ImageView imageView = new SquareImageView(mContext);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            //由于宽（即列）已经定义权重比例 宽设置为0 保证均分
+//            imageview=(ImageView)findViewById(R.id.imageview);
+//            bp=BitmapFactory.decodeResource(getResources(),R.drawable.xiaoyua);
+//
+//            int width=bp.getWidth();
+//            int height=bp.getHeight();
+//            int w=dm.widthPixels; //得到屏幕的宽度
+//            int h=dm.heightPixels; //得到屏幕的高度
+//            scaleWidth=((float)w)/width;
+//            scaleHeight=((float)h)/height;
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;

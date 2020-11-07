@@ -32,7 +32,7 @@ public class UserEntity {
 //        this.password = password;
     }
 
-    public UserEntity(String id, String username, String location,String email, String phone, String age, String header, List<PostEntity> postList){
+    public UserEntity(String id, String username, String location,String email, String phone, String sex, String age, String header, List<PostEntity> postList){
         this.id = id;
         this.username = username;
         this.email = email;
@@ -42,6 +42,7 @@ public class UserEntity {
         this.postList = new ArrayList<>();
         this.postList = postList;
         this.header = header;
+        this.sex = sex;
         //this.postList.addAll(postList);
 
     }

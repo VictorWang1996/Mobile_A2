@@ -199,7 +199,7 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         }
         Log.d("imagePost list", String.valueOf(imageUris.size()));
         String postText = content.getText().toString();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+11"));
         String postTime = simpleDateFormat.format(new Date());
 //        grantPermission();
@@ -231,6 +231,8 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 photoURI = FileProvider.getUriForFile(this,
                         "com.example.assignment2.fileprovider",
                         photoFile);
+                Log.e("file",photoFile.toString());
+                Log.e("open URI",photoURI.toString());
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, TAKE_PHOTO_CODE);
             }
@@ -265,6 +267,7 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         this.sendBroadcast(mediaScanIntent);
     }
     public void pickImageFromAlbum() {
+
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -272,6 +275,7 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
     }
     public void addImage(){
         if (imageUris.size() < MAX_IMAGES) {
+            Log.e("add URI",photoURI.toString());
             imageUris.add(photoURI);
             mImageAdapter.notifyDataSetChanged();
             ImageView imageView = (ImageView) gridLayoutManager.findViewByPosition(0);
@@ -287,8 +291,9 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case TAKE_PHOTO_CODE:
-                if (resultCode == RESULT_OK && data!=null){
+                if (resultCode == RESULT_OK){
                     //showPicture.setImageURI(photoURI);
+                    Log.e("check","enter if ");
                     addImage();
                 }
                 break;

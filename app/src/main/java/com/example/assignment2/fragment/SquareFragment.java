@@ -61,6 +61,7 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 mRefreshLayout.finishLoadMore(2000/*,false*/);
+                Toast.makeText(getActivity(),"No more data available!",Toast.LENGTH_SHORT).show();
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

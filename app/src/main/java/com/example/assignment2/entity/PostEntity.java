@@ -40,6 +40,20 @@ public class PostEntity implements Serializable {
         collectCount= 0 ;
         commentCount = 0;
     }
+    public PostEntity(PostEntity post){
+        this.postImgPath = new ArrayList<>();
+        this.postID = post.getPostID();
+        this.userID = post.getUserID();
+        this.postTime = post.getPostTime();
+        this.postText = post.getPostText();
+        this.location = post.getLocation();
+        this.header = post.getHeader();
+        this.postImgPath = post.getPostImgPath();
+
+        likeCount = post.getLikeCount();
+        collectCount= post.getCollectCount();
+        commentCount = post.getCommentCount();
+    }
 
     public String getLocation(){
         return location;

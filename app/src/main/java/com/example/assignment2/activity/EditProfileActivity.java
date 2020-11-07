@@ -28,6 +28,10 @@ import com.example.assignment2.entity.PostEntity;
 import com.example.assignment2.entity.UserEntity;
 import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.utils.Database;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -162,7 +166,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case TAKE_PHOTO_CODE:
-                if (resultCode == RESULT_OK && data!=null){
+                if (resultCode == RESULT_OK){
                     //showPicture.setImageURI(photoURI);
                     addImage();
                 }
@@ -189,15 +193,33 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         Log.e("CUR",MeFragment.currentuser.age+MeFragment.currentuser.phone+MeFragment.currentuser.location);
         Database.upload_header(imguri,EditProfileActivity.this);
-        Database.update(MeFragment.currentuser);
+
         Toast.makeText(EditProfileActivity.this,"Update",Toast.LENGTH_SHORT).show();
-        List<PostEntity> userposts = new ArrayList<>();
-        userposts = MeFragment.currentuser.postList;
-        for(PostEntity post : userposts){
-            post.setHeader(MeFragment.currentuser.getHeader());
-            post.setUserID(name.getText().toString());
-            Database.update(post);
+//        List<PostEntity> userposts = new ArrayList<>();
+        List<PostEntity> newPostList = new ArrayList<>();
+//        userposts = MeFragment.currentuser.postList;
+//        Log.e("size",String.valueOf(userposts.size()));
+        Log.e("currentuser", MeFragment.currentuser.toString());
+
+        if(MeFragment.currentuser.postList.size()>0){
+            for(PostEntity post : MeFragment.currentuser.postList){
+                PostEntity newPost = new PostEntity(post);
+                if(imguri!=null&& !imguri.toString().equals("")){
+                    newPost.setHeader("headers/"+imguri.getLastPathSegment());
+                    newPost.setUserID(name.getText().toString());
+                    Database.update(newPost);
+                    newPostList.add(newPost);
+                }else{
+                    newPost.setHeader("");
+                    newPost.setUserID(name.getText().toString());
+                    Database.update(newPost);
+                    newPostList.add(newPost);
+                }
+            }
         }
+        MeFragment.currentuser.postList = newPostList;
+        Log.e("currentuser new", MeFragment.currentuser.toString());
+        Database.update(MeFragment.currentuser);
     }
 
     @Override

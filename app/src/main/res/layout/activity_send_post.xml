@@ -18,7 +18,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="48dp"
                 android:src="@drawable/cancel"
-                android:background="@color/colorWhite"
+                android:background="@color/colorTransparent"
                 android:scaleType="fitXY"
                 android:padding="10dp"/>
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="48dp"
                 android:src="@drawable/send"
-                android:background="@color/colorWhite"
+                android:background="@color/colorTransparent"
                 android:scaleType="fitXY"
                 android:padding="10dp"/>
             <View

@@ -34,7 +34,7 @@
             android:layout_height="30dp"
             android:layout_width="40dp"
             android:src="@drawable/btn_picture"
-            android:background="#FFFF"
+            android:background="@color/colorTransparent"
             android:scaleType="centerInside"
             android:padding="6dp"
             android:layout_below="@+id/image_view"
@@ -50,7 +50,7 @@
             android:layout_toRightOf="@+id/ed_picture"
             android:layout_below="@+id/image_view"
             android:layout_marginTop="30dp"
-            android:background="#FFFF"
+            android:background="@color/colorTransparent"
             android:scaleType="centerInside"
 
             android:padding="5dp" />
