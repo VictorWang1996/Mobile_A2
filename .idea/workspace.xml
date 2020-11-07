@@ -11,14 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b832f5fd-ec51-4c64-b5c0-f32a6beb4691" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_drawable_paint_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_footer_ball_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_footer_classics_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_classics_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_material_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_radar_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_two_level_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_layout_kernel_2_0_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/render.experimental.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/EditProfileActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/adapter/UserPostAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profile.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_post_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -34,12 +31,33 @@
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_drawable_paint_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_drawable_paint_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_footer_ball_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_footer_ball_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_footer_classics_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_footer_classics_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_classics_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_classics_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_material_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_material_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_radar_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_radar_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_two_level_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_header_two_level_2_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_layout_kernel_2_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_scwang_smart_refresh_layout_kernel_2_0_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/LogInActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/LogInActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/SendPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/SendPostActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/SignUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/SignUpActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/adapter/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/adapter/PostAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/PostEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/fragment/MeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/fragment/MeFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/fragment/SquareFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/fragment/SquareFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/utils/SpannableMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/utils/SpannableMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/frag_square.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/frag_square.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/utils/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_log_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_log_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_send_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_send_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/frag_me.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/frag_me.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_post_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_post_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,25 +100,29 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$PROJECT_DIR$/../Library/Android/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/utils" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1604467261966" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1604630572702" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.-606676238">
       <recent name="com.example.assignment2.imageTest" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\61478\Mobile_A2\app\src\main\res" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.assignment2.utils" />
+    <key name="android.template.1938679767">
+      <recent name="com.example.assignment2.activity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="C:\Users\61478\Mobile_A2\app\src\main\java\com\example\assignment2\utils" />
       <recent name="C:\Users\61478\Mobile_A2\app\src\main\res\drawable-hdpi" />
       <recent name="C:\Users\61478\Mobile_A2\app\src\main\res\xml" />
       <recent name="C:\Users\61478\Mobile_A2\app\src\main\res\mipmap-xxxhdpi" />
-      <recent name="C:\Users\61478\Mobile_A2\app\src\main\res\layout" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.assignment2.adapter" />
+      <recent name="com.example.assignment2.utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\61478\Mobile_A2\app\src\main\res" />
     </key>
   </component>
   <component name="RunManager">
@@ -177,11 +199,15 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="711" y="152" key="#com.intellij.ide.util.MemberChooser" timestamp="1604561324354">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="533" y="140" key="#com.intellij.ide.util.MemberChooser" timestamp="1604667010046">
+      <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state x="711" y="152" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604561324354" />
-    <state x="533" y="140" key="#com.intellij.ide.util.MemberChooser/0.23.1440.802@0.23.1440.802" timestamp="1604475510133" />
+    <state x="533" y="140" key="#com.intellij.ide.util.MemberChooser/0.23.1440.802@0.23.1440.802" timestamp="1604667010046" />
+    <state x="425" y="114" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1604712505367">
+      <screen x="0" y="23" width="1440" height="802" />
+    </state>
+    <state x="425" y="114" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.23.1440.802@0.23.1440.802" timestamp="1604712505367" />
     <state x="242" y="277" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604551249444">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -190,26 +216,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="423" y="273" width="693" height="490" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604559307381" />
-    <state width="1532" height="196" key="GridCell.Tab.0.bottom" timestamp="1604582178539">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1398" height="205" key="GridCell.Tab.0.bottom" timestamp="1604719514693">
+      <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178539" />
-    <state width="1398" height="205" key="GridCell.Tab.0.bottom/0.23.1440.802@0.23.1440.802" timestamp="1604476649031" />
-    <state width="1532" height="196" key="GridCell.Tab.0.center" timestamp="1604582178538">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1398" height="205" key="GridCell.Tab.0.bottom/0.23.1440.802@0.23.1440.802" timestamp="1604719514693" />
+    <state width="1398" height="205" key="GridCell.Tab.0.center" timestamp="1604719514692">
+      <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178538" />
-    <state width="1398" height="205" key="GridCell.Tab.0.center/0.23.1440.802@0.23.1440.802" timestamp="1604476649030" />
-    <state width="1532" height="196" key="GridCell.Tab.0.left" timestamp="1604582178538">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1398" height="205" key="GridCell.Tab.0.center/0.23.1440.802@0.23.1440.802" timestamp="1604719514692" />
+    <state width="1398" height="205" key="GridCell.Tab.0.left" timestamp="1604719514691">
+      <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178538" />
-    <state width="1398" height="205" key="GridCell.Tab.0.left/0.23.1440.802@0.23.1440.802" timestamp="1604476649030" />
-    <state width="1532" height="196" key="GridCell.Tab.0.right" timestamp="1604582178538">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1398" height="205" key="GridCell.Tab.0.left/0.23.1440.802@0.23.1440.802" timestamp="1604719514691" />
+    <state width="1398" height="205" key="GridCell.Tab.0.right" timestamp="1604719514692">
+      <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178538" />
-    <state width="1398" height="205" key="GridCell.Tab.0.right/0.23.1440.802@0.23.1440.802" timestamp="1604476649031" />
+    <state width="1398" height="205" key="GridCell.Tab.0.right/0.23.1440.802@0.23.1440.802" timestamp="1604719514692" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1604554994796">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -218,9 +244,10 @@
       <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state x="422" y="47" key="refactoring.ChangeSignatureDialog/0.23.1440.802@0.23.1440.802" timestamp="1604474276721" />
-    <state x="443" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604565659752">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="332" y="197" width="670" height="523" key="search.everywhere.popup" timestamp="1604657259891">
+      <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state x="443" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604565659752" />
+    <state x="332" y="197" width="670" height="523" key="search.everywhere.popup/0.23.1440.802@0.23.1440.802" timestamp="1604657259891" />
   </component>
 </project>

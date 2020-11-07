@@ -18,6 +18,7 @@ import com.example.assignment2.adapter.NavigationFragmentPagerAdapter;
 import com.example.assignment2.fragment.SearchFragment;
 import com.example.assignment2.fragment.SquareFragment;
 import com.example.assignment2.fragment.MeFragment;
+import com.example.assignment2.utils.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setNavigationSize(rb_search);
         //set the first page
         rb_square.setChecked(true);
+        //current user
+//        Database.loadCurrentUser();
     }
 
     private void setNavigationSize(RadioButton rb){

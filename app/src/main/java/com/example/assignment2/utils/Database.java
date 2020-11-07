@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.assignment2.entity.PostEntity;
 import com.example.assignment2.entity.UserEntity;
+import com.example.assignment2.fragment.MeFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,9 +88,15 @@ public class Database {
                 if(!dataSnapshot.exists()){
                     UserEntity temp_user = dataSnapshot.getValue(UserEntity.class);
 //                  Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
-                    UserEntity new_user = new UserEntity(temp_user);
-                    new_user.addPost(post);
-                    update(new_user);
+
+//                    if(temp_user.postList == null){
+//                        temp_user.postList = new ArrayList<>();
+//                    }
+                    temp_user.addPost(post);
+                    Log.e("D",String.valueOf(temp_user.postList.size()));
+                    Log.e("D",temp_user.toString());
+//                    update(temp_user);
+//                    mFdatabase.child("users").child(temp_user.id).child("postList").child(post.getPostID()).setValue(post);
                 }
                 // ...
             }
@@ -106,10 +113,11 @@ public class Database {
     }
 
     public static void loadCurrentUser(final TextView tv_name, final TextView tv_sex, final TextView tv_age,
-                                       final TextView tv_email, final TextView tv_location, Activity activity){
+                                       final TextView tv_email, final TextView tv_location, final TextView tv_phone,
+                                       final ImageView img_header, final Activity activity){
         FirebaseUser user = Database.mAuth.getCurrentUser();
         if(user==null){
-            Toast.makeText(activity,"Log in Please",Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity,"Sign in Please",Toast.LENGTH_SHORT).show();
             return;
         }
         ValueEventListener userListener = new ValueEventListener() {
@@ -117,21 +125,32 @@ public class Database {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()){
-                    UserEntity loadUser = dataSnapshot.getValue(UserEntity.class);
+                    UserEntity loaduser = dataSnapshot.getValue(UserEntity.class);
+                    MeFragment.currentuser = new UserEntity((loaduser));
 //                    Toast.makeText(getActivity(),loadUser.toString(),Toast.LENGTH_SHORT).show();
-                    tv_name.setText(loadUser.username);
-                    tv_email.setText(loadUser.email);
-                    if(loadUser.age!="" && loadUser.age!=null){
+                    tv_name.setText(MeFragment.currentuser.username);
+                    tv_email.setText(MeFragment.currentuser.email);
+                    Log.e("Database",MeFragment.currentuser.getHeader());
+                    if(!MeFragment.currentuser.getHeader().equals("") && MeFragment.currentuser.getHeader()!=null){
+                        Database.download_image(MeFragment.currentuser.getHeader(),activity,img_header);
+                        Log.e("Database",MeFragment.currentuser.getHeader());
+                    }
+                    if(!MeFragment.currentuser.age.equals("") && MeFragment.currentuser.age!=null){
                         tv_age.setVisibility(View.VISIBLE);
-                        tv_age.setText(loadUser.age);
+                        tv_age.setText(MeFragment.currentuser.age);
                     }
-                    if(loadUser.sex!=""&& loadUser.sex!=null){
+                    if(!MeFragment.currentuser.phone.equals("") && MeFragment.currentuser.phone!=null){
+                        tv_phone.setVisibility(View.VISIBLE);
+                        tv_phone.setText(MeFragment.currentuser.phone);
+                    }
+                    if(!MeFragment.currentuser.sex.equals("") && MeFragment.currentuser.sex!=null){
                         tv_sex.setVisibility(View.VISIBLE);
-                        tv_sex.setText(loadUser.sex);
+                        tv_sex.setText(MeFragment.currentuser.sex);
                     }
-                    if(loadUser.location!="" && loadUser.location!=null){
+                    if(!MeFragment.currentuser.location.equals("") && MeFragment.currentuser.location!=null){
                         tv_location.setVisibility(View.VISIBLE);
-                        tv_location.setText(loadUser.location);
+                        tv_location.setText(MeFragment.currentuser.location);
+                        Log.e("location",tv_location.getText().toString());
                     }
                 }
                 // ...
@@ -146,6 +165,36 @@ public class Database {
         };
         Database.mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
 
+    }
+
+    public static void loadCurrentUser(){
+        {
+            FirebaseUser user = Database.mAuth.getCurrentUser();
+            if(user==null){
+//                Toast.makeText(activity,"Sign in Please",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            ValueEventListener userListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if(dataSnapshot.exists()){
+                        UserEntity loaduser = dataSnapshot.getValue(UserEntity.class);
+                        MeFragment.currentuser = new UserEntity(loaduser);
+                    }
+                    // ...
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
+                    // ...
+                }
+            };
+            Database.mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
+
+        }
     }
 
 
@@ -165,7 +214,7 @@ public class Database {
                     Log.e("Map size", String.valueOf(map.size()));
                     for(PostEntity key:map.values()){
                         postList.add(key);
-                        Log.e("Add", String.valueOf(postList.size()));
+//                        Log.e("Add", String.valueOf(postList.size()));
                     }
                     Log.d("Type:",dataSnapshot.getValue().getClass().toString());
                 }
@@ -267,5 +316,39 @@ public class Database {
 
 
 
+    public static void upload_header(Uri file, final Activity activity) throws FileNotFoundException {
+        StorageReference mStorageRef = mfirebaseStorage.getReference();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null){
+            Toast.makeText(activity,"Please log in.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        Uri file = Uri.fromFile(new File(path));
+        if(file == null){
+            Toast.makeText(activity,"file not found",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        StorageReference riversRef = mStorageRef.child("headers/"+file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Toast.makeText(activity,"upload fail",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+                Toast.makeText(activity,"upload success",Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+    }
 }

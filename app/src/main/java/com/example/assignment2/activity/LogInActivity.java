@@ -24,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_logIn;
     private Button btn_signUp;
-    private Button btn_testSignOut;
     private TextView mEmail;
     private TextView mPassword;
     FirebaseAuth mAuth;
@@ -37,9 +36,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         btn_signUp.setOnClickListener(this);
         btn_logIn = findViewById(R.id.btn_login);
         btn_logIn.setOnClickListener(this);
-        btn_testSignOut = findViewById(R.id.test_sign_out);
-        btn_testSignOut.setOnClickListener(this);
-
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mAuth = Database.mAuth;
@@ -96,7 +92,9 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                             }
                             //check if the user has been store into the database;
                             Database.createUser();
-                            Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
+                            Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
+                            startActivity(toMain);
+//                            Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
 
 //
                         } else {
@@ -125,12 +123,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 //                Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
 //                startActivity(toMain);
                 return;
-            case R.id.test_sign_out:
-                if(mAuth.getCurrentUser()!=null){
-                    mAuth.signOut();
-                    Toast.makeText(LogInActivity.this,"Sign Out!",Toast.LENGTH_SHORT).show();
-                }
-                return;
+
 
         }
     }

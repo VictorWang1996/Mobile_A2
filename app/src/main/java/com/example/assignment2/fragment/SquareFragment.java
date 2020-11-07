@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.assignment2.R;
+import com.example.assignment2.activity.LogInActivity;
 import com.example.assignment2.activity.SendPostActivity;
 import com.example.assignment2.adapter.PostAdapter;
 import com.example.assignment2.entity.PostEntity;
@@ -82,7 +84,7 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
                     List<PostEntity> posts = new ArrayList<>();
                     for(PostEntity key:map.values()){
                         posts.add(key);
-                        Log.e("Add", String.valueOf(posts.size()));
+//                        Log.e("Add", String.valueOf(posts.size()));
                     }
                     Collections.sort(posts, new Comparator<PostEntity>() {
                         @Override
@@ -112,8 +114,16 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
         Intent intent = null;
         switch (v.getId()) {
             case R.id.btn_sendpost:
-                intent = new Intent(getActivity(), SendPostActivity.class);
-                startActivity(intent);
+                if(Database.mAuth.getCurrentUser() == null){
+                    Toast.makeText(getContext(),"Sign In Please!", Toast.LENGTH_SHORT).show();
+                    intent  = new Intent(getActivity(), LogInActivity.class);
+                    startActivity(intent);
+                }else{
+//                    Database.loadCurrentUser(getContext());
+                    intent = new Intent(getActivity(), SendPostActivity.class);
+                    startActivity(intent);
+                }
+                break;
         }
     }
     @Override

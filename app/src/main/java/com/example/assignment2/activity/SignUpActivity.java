@@ -33,7 +33,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         btn_signUp = findViewById(R.id.btn_register);
         btn_signUp.setOnClickListener(this);
-//        edt_username = findViewById(R.id.username);
         edt_email = findViewById(R.id.reg_email);
         edt_password = findViewById(R.id.reg_password);
     }
@@ -147,12 +146,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
-//    }
 
 
 }

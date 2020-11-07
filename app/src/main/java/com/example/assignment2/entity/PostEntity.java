@@ -12,6 +12,7 @@ public class PostEntity implements Serializable {
     private int likeCount;
     private int collectCount;
     private int commentCount;
+    private String location;
     private List<String> postImgPath;
 
     public List<String> getPostImgPath() {
@@ -24,19 +25,26 @@ public class PostEntity implements Serializable {
 
     public PostEntity(){
     }
-    public PostEntity(String postID,String userID,String postTime, String postText,List<String> postImgPath){
+    public PostEntity(String postID,String userID,String postTime, String postText, String location, List<String> postImgPath){
         this.postImgPath = new ArrayList<>();
         this.postID = postID;
         this.userID = userID;
         this.postTime = postTime;
         this.postText = postText;
+        this.location = location;
         this.postImgPath = postImgPath;
+
         likeCount = 0;
         collectCount= 0 ;
         commentCount = 0;
     }
 
-
+    public String getLocation(){
+        return location;
+    }
+    public void setLocation(String location){
+        this.location = location;
+    }
     public String getPostID() {
         return postID;
     }

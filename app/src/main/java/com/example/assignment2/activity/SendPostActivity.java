@@ -1,11 +1,21 @@
 package com.example.assignment2.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.Spannable;
 import android.util.Log;
@@ -17,12 +27,19 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.assignment2.entity.PostEntity;
+import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.utils.Database;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,9 +58,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
-public class SendPostActivity extends AppCompatActivity implements View.OnClickListener {
+public class SendPostActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
     private EmotionInputDetector mDetector;
     ImageButton send,cancel,btn_emoji,btn_camera,btn_picture;
@@ -59,6 +77,10 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
     ImageAdapter mImageAdapter;
     GridLayoutManager gridLayoutManager;
     private List<Note> mNote = EmotionData.getNotes();
+    LocationManager locationManager;
+    private String address="";
+
+
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +170,9 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_send:
                 try {
+                    grantPermission();
+                    checkLocationEnabled();
+                    getLocation();
                     sendPost();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -176,10 +201,14 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+11"));
         String postTime = simpleDateFormat.format(new Date());
-        PostEntity post = new PostEntity(Database.mAuth.getUid()+"-"+postTime, Database.mAuth.getUid(), postTime,postText,cloudPath);
-        Log.d("Post list", String.valueOf(post.getPostImgPath().size()));
+//        grantPermission();
+//        checkLocationEnabled();
+//        getLocation();
+        PostEntity post = new PostEntity(Database.mAuth.getUid()+"-"+postTime, MeFragment.currentuser.getUsername(), postTime,postText,address,cloudPath);
+        Log.e("Send list", String.valueOf(post.getPostImgPath().size()));
         Database.update(post);
-        Database.updateUser(post);
+        MeFragment.currentuser.addPost(post);
+        Database.update(MeFragment.currentuser);
         imageUris.clear();
         Toast.makeText(SendPostActivity.this,"already send",Toast.LENGTH_SHORT).show();
     }
@@ -270,6 +299,101 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+
+    private void getLocation() {
+        try{
+            locationManager= (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void grantPermission() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) !=PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+        }
+    }
+
+    private void checkLocationEnabled() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean gpsEnabled = false;
+        boolean networdEnabled = false;
+        try{
+            gpsEnabled=lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            networdEnabled=lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if( !gpsEnabled && !networdEnabled){
+            new AlertDialog.Builder(SendPostActivity.this)
+                    .setTitle("Enable GPS Service")
+                    .setCancelable(false)
+                    .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //redirect to location setting
+                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                        }
+                    }).setNegativeButton("Cancel", null)
+                    .show();
+        }
+    }
+
+
+
+
+
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+            try {
+                Geocoder geocoder=new Geocoder(getApplicationContext(), Locale.getDefault());
+                List<Address> addressList= geocoder.getFromLocation(location.getLatitude(),location.getLongitude(), 1);
+                String country = addressList.get(0).getCountryName();
+                String adminArea = addressList.get(0).getAdminArea();
+                String locality  = addressList.get(0).getLocality();
+                this.address = country+", "+adminArea+", "+locality;
+                Log.e("L",this.address);
+//                tvState.setText(addressList.get(0).getAdminArea() );
+//                tvCity.setText(addressList.get(0).getLocality());
+//                tvPin.setText(addressList.get(0).getPostalCode());
+//                tvAds.setText(addressList.get(0).getAddressLine(0));
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
     private class EmojiGridViewAdapter extends BaseAdapter {
         @Override
         public View getView(int position, View view, ViewGroup parent) {

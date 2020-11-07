@@ -8,13 +8,22 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/tv_login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="40sp"
+            android:text="Log In"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="24dp"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -41,6 +50,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="48dp"
+            android:background="#03A9F4"
             android:text="log in"
             />
 
@@ -52,17 +62,9 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="48dp"
+            android:background="#03A9F4"
+
             android:text="sign up"
-            />
-        <Button
-            android:id="@+id/test_sign_out"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginTop="16dp"
-            android:text="test sign out"
             />
 
     </LinearLayout>
