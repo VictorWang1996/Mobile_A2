@@ -14,29 +14,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b832f5fd-ec51-4c64-b5c0-f32a6beb4691" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/EditProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/EditProfileActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/SendPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/activity/SendPostActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/adapter/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/adapter/PostAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/PostEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/PostEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/entity/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/fragment/SquareFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/assignment2/fragment/SquareFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_send_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_send_post.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_XL_API_29]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -197,26 +182,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="423" y="273" width="693" height="490" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604559307381" />
-    <state width="1398" height="182" key="GridCell.Tab.0.bottom" timestamp="1604760066152">
+    <state width="1398" height="181" key="GridCell.Tab.0.bottom" timestamp="1604760265162">
       <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178539" />
-    <state width="1398" height="182" key="GridCell.Tab.0.bottom/0.23.1440.802@0.23.1440.802" timestamp="1604760066152" />
-    <state width="1398" height="182" key="GridCell.Tab.0.center" timestamp="1604760066151">
+    <state width="1398" height="181" key="GridCell.Tab.0.bottom/0.23.1440.802@0.23.1440.802" timestamp="1604760265162" />
+    <state width="1398" height="181" key="GridCell.Tab.0.center" timestamp="1604760265162">
       <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178538" />
-    <state width="1398" height="182" key="GridCell.Tab.0.center/0.23.1440.802@0.23.1440.802" timestamp="1604760066151" />
-    <state width="1398" height="182" key="GridCell.Tab.0.left" timestamp="1604760066151">
+    <state width="1398" height="181" key="GridCell.Tab.0.center/0.23.1440.802@0.23.1440.802" timestamp="1604760265162" />
+    <state width="1398" height="181" key="GridCell.Tab.0.left" timestamp="1604760265159">
       <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178538" />
-    <state width="1398" height="182" key="GridCell.Tab.0.left/0.23.1440.802@0.23.1440.802" timestamp="1604760066151" />
-    <state width="1398" height="182" key="GridCell.Tab.0.right" timestamp="1604760066152">
+    <state width="1398" height="181" key="GridCell.Tab.0.left/0.23.1440.802@0.23.1440.802" timestamp="1604760265159" />
+    <state width="1398" height="181" key="GridCell.Tab.0.right" timestamp="1604760265162">
       <screen x="0" y="23" width="1440" height="802" />
     </state>
     <state width="1532" height="196" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604582178538" />
-    <state width="1398" height="182" key="GridCell.Tab.0.right/0.23.1440.802@0.23.1440.802" timestamp="1604760066152" />
+    <state width="1398" height="181" key="GridCell.Tab.0.right/0.23.1440.802@0.23.1440.802" timestamp="1604760265162" />
     <state x="221" y="63" key="SettingsEditor" timestamp="1604742589536">
       <screen x="0" y="23" width="1440" height="802" />
     </state>

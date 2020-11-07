@@ -13,6 +13,7 @@ public class UserEntity {
     public String location = "";
     private String header="";
     public List<PostEntity> postList;
+    private List<String> liked;
 //    private String password;
 
     public UserEntity(){
@@ -29,10 +30,11 @@ public class UserEntity {
         this.location = "";
         this.header = "";
         this.postList = new ArrayList<>();
+        this.liked = new ArrayList<>();
 //        this.password = password;
     }
 
-    public UserEntity(String id, String username, String location,String email, String phone, String sex, String age, String header, List<PostEntity> postList){
+    public UserEntity(String id, String username, String location,String email, String phone, String sex, String age, String header, List<PostEntity> postList, List<String> liked){
         this.id = id;
         this.username = username;
         this.email = email;
@@ -43,6 +45,8 @@ public class UserEntity {
         this.postList = postList;
         this.header = header;
         this.sex = sex;
+        this.liked = new ArrayList<>();
+        this.liked = liked;
         //this.postList.addAll(postList);
 
     }
@@ -58,7 +62,27 @@ public class UserEntity {
         this.postList = new ArrayList<>();
         this.postList = user.postList;
         this.header = user.getHeader();
+        this.liked = new ArrayList<>();
+        this.liked = user.getLiked();
 
+    }
+
+
+    public List<String> getLiked(){
+        return this.liked;
+    }
+    public void setLiked(List<String> liked){
+        if(this.liked ==null){
+            this.liked = new ArrayList<>();
+        }
+        this.liked = liked;
+    }
+
+    public void addLike(String postID){
+        if(liked == null){
+            liked = new ArrayList<>();
+        }
+        liked.add(postID);
     }
 
     public void addPost(PostEntity post){
