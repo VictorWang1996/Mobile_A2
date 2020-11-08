@@ -1,7 +1,9 @@
 package com.example.assignment2.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +36,8 @@ import com.example.assignment2.listener.OnItemChildClickListener;
 import com.example.assignment2.utils.Database;
 import com.example.assignment2.utils.Tag;
 import com.example.assignment2.utils.Utils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -62,6 +66,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener
     protected CompleteView mCompleteView;
     protected TitleView mTitleView;
     private LinearLayoutManager mLinearLayoutManager;
+
 
     private List<VideoEntity> videos = new ArrayList<>();
     /**
@@ -109,7 +114,6 @@ public class VideoFragment extends Fragment implements View.OnClickListener
                 }
             }
         });
-        loadVideos();
         setClickListener();
     }
 
@@ -118,6 +122,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.frag_video,container,false);
         initView();
+        loadVideos();
         return mRootView;
     }
     protected void initVideoView() {
@@ -234,11 +239,10 @@ public class VideoFragment extends Fragment implements View.OnClickListener
                     //Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue(Map.class);
                     GenericTypeIndicator<Map<String, VideoEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, VideoEntity>>() {};
                     Map<String, VideoEntity> map = dataSnapshot.getValue(genericTypeIndicator);
-                    List<VideoEntity> videos = new ArrayList<>();
-                    for(VideoEntity key:map.values()){
-                        videos.add(key);
-//                        Log.e("Add", String.valueOf(posts.size()));
-                    }
+                    //List<VideoEntity> videos = new ArrayList<>();
+                    //                        Log.e("Add", String.valueOf(posts.size()));
+                    videos.clear();
+                    videos.addAll(map.values());
                     Collections.sort(videos, new Comparator<VideoEntity>() {
                         @Override
                         public int compare(VideoEntity o1, VideoEntity o2) {
@@ -246,13 +250,14 @@ public class VideoFragment extends Fragment implements View.OnClickListener
                         }
                     });
                     VideoAdapter videoAdapter = new VideoAdapter(getActivity(),videos);
+                    mRecyclerview.setAdapter(videoAdapter);
                     videoAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
                         @Override
                         public void onItemChildClick(int position) {
                             startPlay(position);
                         }
                     });
-                    mRecyclerview.setAdapter(videoAdapter);
+
 
                 }
             }
@@ -262,9 +267,12 @@ public class VideoFragment extends Fragment implements View.OnClickListener
                 Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
             }
         };
-        Database.mFdatabase.child("posts").addListenerForSingleValueEvent(postsListener);
+        Database.mFdatabase.child("videos").addListenerForSingleValueEvent(postsListener);
 
     }
+
+
+
 
     private void setClickListener(){
         btn_sendVideo.setOnClickListener(this);

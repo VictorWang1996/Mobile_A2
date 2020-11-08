@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.assignment2.entity.PostEntity;
 import com.example.assignment2.entity.UserEntity;
+import com.example.assignment2.entity.VideoEntity;
 import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.view.CircleTransform;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,7 +41,7 @@ import java.util.Map;
 public class Database {
     private static FirebaseDatabase mfirebaseDatabase = FirebaseDatabase.getInstance();
     private static FirebaseStorage mfirebaseStorage = FirebaseStorage.getInstance();
-    private static StorageReference mStorageRef = mfirebaseStorage.getReference();
+    public static StorageReference mStorageRef = mfirebaseStorage.getReference();
     public static DatabaseReference mFdatabase = mfirebaseDatabase.getReference();
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static List<PostEntity> postList;
@@ -241,6 +242,10 @@ public class Database {
         mFdatabase.child("posts").child(post.getPostID()).setValue(post);
     }
 
+    public static void update(VideoEntity video){
+        mFdatabase.child("videos").child(video.getVideoID()).setValue(video);
+    }
+
     public static void download_image(String image_name, final Context activity, final ImageView image){
 
         mStorageRef.child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -276,25 +281,7 @@ public class Database {
             }
         });
     }
-    public static void download_image(String image_name, final Activity activity, final ImageView image, UserEntity user){
 
-        mStorageRef.child("posts/"+user.id+"/"+image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                Glide.with(activity).load(uri).into(image);
-                Toast.makeText(activity,"load success",Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
-                // Handle any errors
-            }
-        });
-
-    }
 
     public static void upload_image(Uri file, final Activity activity) throws FileNotFoundException {
         StorageReference mStorageRef = mfirebaseStorage.getReference();

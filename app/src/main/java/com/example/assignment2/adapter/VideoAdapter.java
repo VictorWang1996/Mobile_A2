@@ -1,6 +1,8 @@
 package com.example.assignment2.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.text.Spannable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,8 @@ import com.example.assignment2.listener.OnItemChildClickListener;
 import com.example.assignment2.listener.OnItemClickListener;
 import com.example.assignment2.utils.Database;
 import com.example.assignment2.utils.SpannableMaker;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,7 +62,6 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             vh.tvLocation.setText(videoEntity.getLocation());
 //            Log.e("Location2",vh.tvLocation.getText().toString());
         }
-
         if(videoEntity.getHeader()!=null && !videoEntity.getHeader().equals("")){
             //Picasso.with(mContext).load(videoEntity.getHeader()).transform(new CircleTransform()).into(vh.ivHeader);
             Database.download_headerImage(videoEntity.getHeader(),mContext,vh.ivHeader);
@@ -70,10 +74,30 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             vh.tvPostContent.setVisibility(View.VISIBLE);
         }
         if(videoEntity.getCoverUrl()!=null && !videoEntity.getCoverUrl().equals("")){
-            Picasso.with(mContext).load(videoEntity.getCoverUrl()).into(vh.mThumb);
-            //Database.download_image(videoEntity.getHeader(),mContext,vh.ivHeader);
+            //Picasso.with(mContext).load(videoEntity.getCoverUrl()).into(vh.mThumb);
+            Database.download_image(videoEntity.getCoverUrl(),mContext,vh.ivHeader);
+            //Log.e("Database",videoEntity.getCoverUrl());
+        }
+        if(videoEntity.getHeader()!=null && !videoEntity.getHeader().equals("")){
+            Database.download_headerImage(videoEntity.getHeader(),mContext,vh.ivHeader);
             Log.e("Database",videoEntity.getCoverUrl());
         }
+        if(videoEntity.getVideoPath()!=null &&!videoEntity.getCoverUrl().equals("")){
+            Database.mStorageRef.child(videoEntity.getVideoPath()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    // Got the download URL for 'users/me/profile.png'
+                    videoEntity.setVideoPath(uri.toString());
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    Toast.makeText(mContext,"load fail",Toast.LENGTH_SHORT).show();
+                    // Handle any errors
+                }
+            });
+        }
+
 
 
     // set image header here
@@ -139,5 +163,23 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
+    }
+
+
+    public static void download_videos(String image_name, final Activity activity){
+
+        Database.mStorageRef.child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
+                // Handle any errors
+            }
+        });
     }
 }

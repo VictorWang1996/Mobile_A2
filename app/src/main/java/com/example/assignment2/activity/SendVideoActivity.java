@@ -188,7 +188,7 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         //Log.e("Send list", String.valueOf(post.getPostImgPath().size()));
        // Database.update(post);
         //MeFragment.currentuser.addPost(post);
-        Database.update(MeFragment.currentuser);
+        Database.update(video);
         Toast.makeText(SendVideoActivity.this,"already send",Toast.LENGTH_SHORT).show();
     }
 
