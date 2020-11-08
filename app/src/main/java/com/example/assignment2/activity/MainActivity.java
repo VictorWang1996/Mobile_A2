@@ -15,10 +15,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.assignment2.R;
 import com.example.assignment2.adapter.NavigationFragmentPagerAdapter;
+import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.fragment.SearchFragment;
 import com.example.assignment2.fragment.SquareFragment;
-import com.example.assignment2.fragment.MeFragment;
-import com.example.assignment2.utils.Database;
+import com.example.assignment2.fragment.VideoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textTopBar;
     private List<Fragment> mFragments;
     private NavigationFragmentPagerAdapter mAdapter;
-    private RadioButton rb_square, rb_me,rb_search;
+    private RadioButton rb_square, rb_me,rb_search,rb_video;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rb_square = findViewById(R.id.rb_square);
         rb_me = findViewById(R.id.rb_me);
         rb_search = findViewById(R.id.rb_search);
+        rb_video = findViewById(R.id.rb_video);
         // init fragment
         mFragments = new ArrayList<>(3);
         mFragments.add(new SearchFragment());
+        mFragments.add(new VideoFragment());
         mFragments.add(new SquareFragment());
         mFragments.add(new MeFragment());
+
         // init view pager
         mAdapter = new NavigationFragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,mFragments);
         mViewPager.setAdapter(mAdapter);
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setNavigationSize(rb_me);
         setNavigationSize(rb_square);
         setNavigationSize(rb_search);
+        setNavigationSize(rb_video);
         //set the first page
         rb_square.setChecked(true);
         //current user

@@ -73,11 +73,12 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             vh.tvLocation.setText(postEntity.getLocation());
 //            Log.e("Location2",vh.tvLocation.getText().toString());
         }
-
         if(postEntity.getHeader()!=null && !postEntity.getHeader().equals("")){
-            Database.download_image(postEntity.getHeader(),mContext,vh.ivHeader);
+            Database.download_headerImage(postEntity.getHeader(),mContext,vh.ivHeader);
+            //Database.download_image(postEntity.getHeader(),mContext,vh.ivHeader);
             Log.e("Database",postEntity.getHeader());
         }
+       
         if(postEntity.getPostText()!=null && !postEntity.getPostText().equals("")) {
             Spannable spannable = SpannableMaker.buildEmotionSpannable(mContext, postEntity.getPostText(), (int)vh.tvPostContent.getTextSize());
             vh.tvPostContent.setText(spannable);

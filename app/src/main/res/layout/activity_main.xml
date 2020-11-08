@@ -19,6 +19,12 @@
         android:text="search"
             android:layout_marginTop="2dp"/>
         <RadioButton
+            android:id="@+id/rb_video"
+            style="@style/navigation_item"
+            android:drawableTop="@drawable/navi_search"
+            android:text="video"
+            android:layout_marginTop="2dp"/>
+        <RadioButton
             android:id="@+id/rb_square"
             style="@style/navigation_item"
             android:drawableTop="@drawable/navi_square"

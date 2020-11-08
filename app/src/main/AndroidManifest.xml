@@ -30,6 +30,9 @@
         <activity
             android:name=".activity.SendPostActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.SendVideoActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

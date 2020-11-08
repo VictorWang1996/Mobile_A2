@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: com.scwang.smart:refresh-layout-kernel:2.0.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ae06f7dfd93abe6b123829e10bc65b0/jetified-refresh-layout-kernel-2.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ae06f7dfd93abe6b123829e10bc65b0/jetified-refresh-layout-kernel-2.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ae06f7dfd93abe6b123829e10bc65b0/jetified-refresh-layout-kernel-2.0.1/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/a2123edbfdbe8045d2f4e5a7fb89a4c6/jetified-refresh-layout-kernel-2.0.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/a2123edbfdbe8045d2f4e5a7fb89a4c6/jetified-refresh-layout-kernel-2.0.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/a2123edbfdbe8045d2f4e5a7fb89a4c6/jetified-refresh-layout-kernel-2.0.1/res" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-layout-kernel/2.0.1/8332fa145c385ff6a9c3a76d961bc29858c699b1/refresh-layout-kernel-2.0.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-layout-kernel/2.0.1/8332fa145c385ff6a9c3a76d961bc29858c699b1/refresh-layout-kernel-2.0.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-layout-kernel/2.0.1/4be9a13d625bab2257dec37ad8545bbcacd41d28/refresh-layout-kernel-2.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-layout-kernel/2.0.1/4be9a13d625bab2257dec37ad8545bbcacd41d28/refresh-layout-kernel-2.0.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -246,7 +246,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             }
                         }
                         Database.update(MeFragment.currentuser);
-                        Log.e("CurrrentUSer Like",String.valueOf(MeFragment.currentuser.getLiked().size()));
+                        //Log.e("CurrrentUSer Like",String.valueOf(MeFragment.currentuser.getLiked().size()));
                     }
                     // ...
                 }
@@ -304,7 +304,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){
                         UserEntity temp_user = dataSnapshot.getValue(UserEntity.class);
-                        Log.e("User Collect",String.valueOf(temp_user.getCollect().size()));
+//                        Log.e("User Collect",String.valueOf(temp_user.getCollect().size()));
                         if(temp_user.getCollect()!=null && temp_user.getCollect().size()>0){
                             for(PostEntity collect : temp_user.getCollect()){
                                 if((collect.getPostID()).equals(postEntity.getPostID())){
@@ -316,7 +316,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             }
                         }
                         Database.update(MeFragment.currentuser);
-                        Log.e("CurrrentUSer collect",String.valueOf(MeFragment.currentuser.getLiked().size()));
+//                        Log.e("CurrrentUSer collect",String.valueOf(MeFragment.currentuser.getLiked().size()));
                     }
                     // ...
                 }

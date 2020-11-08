@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 //repositories {
@@ -60,4 +64,13 @@ dependencies {
     implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'
     implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'
     implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.6'
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.6'
+    implementation 'com.github.dueeeke.dkplayer:player-exo:3.2.6'
+    implementation 'com.github.dueeeke.dkplayer:player-ijk:3.2.6'
+    implementation 'com.github.dueeeke.dkplayer:videocache:3.2.6'
+
 }

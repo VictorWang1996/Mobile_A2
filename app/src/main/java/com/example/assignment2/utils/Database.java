@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.assignment2.entity.PostEntity;
 import com.example.assignment2.entity.UserEntity;
 import com.example.assignment2.fragment.MeFragment;
+import com.example.assignment2.view.CircleTransform;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -257,6 +259,23 @@ public class Database {
         });
     }
 
+    public static void download_headerImage(String image_name, final Context activity, final ImageView image){
+
+        mStorageRef.child(image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+                Picasso.with(activity).load(uri).transform(new CircleTransform()).into(image);
+                //Glide.with(activity).load(uri).into(image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
+                // Handle any errors
+            }
+        });
+    }
     public static void download_image(String image_name, final Activity activity, final ImageView image, UserEntity user){
 
         mStorageRef.child("posts/"+user.id+"/"+image_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
