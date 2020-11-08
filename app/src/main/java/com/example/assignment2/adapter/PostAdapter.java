@@ -1,6 +1,9 @@
 package com.example.assignment2.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.text.Editable;
 import android.text.Spannable;
 import android.util.Log;
@@ -10,18 +13,27 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignment2.R;
+import com.example.assignment2.activity.LogInActivity;
+import com.example.assignment2.activity.MainActivity;
 import com.example.assignment2.activity.SendPostActivity;
 import com.example.assignment2.entity.PostEntity;
+import com.example.assignment2.entity.UserEntity;
 import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.utils.SpannableMaker;
 import com.example.assignment2.view.SquareImageView;
 import com.example.assignment2.utils.Database;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -44,12 +56,17 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
-        PostEntity postEntity = posts.get(position);
+        final PostEntity postEntity = posts.get(position);
         vh.tvAuthor.setText(postEntity.getUserID());
         vh.tvTime.setText(postEntity.getPostTime());
         vh.tvComment.setText(String.valueOf(postEntity.getCommentCount()));
         vh.tvCollect.setText(String.valueOf(postEntity.getCollectCount()));
         vh.tvLike.setText(String.valueOf(postEntity.getLikeCount()));
+        vh.mPosition = position;
+//        vh.flagLike = false;
+        checkLiked(vh,postEntity);
+        checkCollect(vh,postEntity);
+
 //        Log.e("Location", postEntity.getLocation());
         if(postEntity.getLocation()!=null&&!postEntity.getLocation().equals("")){
             vh.tvLocation.setVisibility(View.VISIBLE);
@@ -75,15 +92,6 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             ImageView imageView = new SquareImageView(mContext);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//            imageview=(ImageView)findViewById(R.id.imageview);
-//            bp=BitmapFactory.decodeResource(getResources(),R.drawable.xiaoyua);
-//
-//            int width=bp.getWidth();
-//            int height=bp.getHeight();
-//            int w=dm.widthPixels; //得到屏幕的宽度
-//            int h=dm.heightPixels; //得到屏幕的高度
-//            scaleWidth=((float)w)/width;
-//            scaleHeight=((float)h)/height;
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
@@ -100,7 +108,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return this.posts.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvAuthor;
         private TextView tvTime;
         private TextView tvLike;
@@ -110,6 +118,10 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ImageView ivHeader;
         private GridLayout gridLayout;
         private TextView tvLocation;
+        public int mPosition;
+        private ImageView ivLike;
+        private ImageView ivCollect;
+        private boolean flagLike, flagCollect;
         public ViewHolder(@NonNull View View) {
             super(View);
             tvAuthor = View.findViewById(R.id.author);
@@ -121,6 +133,207 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ivHeader = View.findViewById(R.id.img_header);
             tvLocation= View.findViewById(R.id.location);
             gridLayout = View.findViewById(R.id.gridlayout_post);
+            ivLike = View.findViewById(R.id.img_like);
+            ivCollect = View.findViewById(R.id.img_collect);
+//            flagCollect = false;
+//            flagLike = false;
+            ivLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View v) {
+                    int likeNum = Integer.parseInt(tvLike.getText().toString());
+                    if(flagLike){
+                        if(likeNum>0){
+                            tvLike.setText(String.valueOf(--likeNum));
+                            posts.get(mPosition).setLikeCount(posts.get(mPosition).getLikeCount()-1);
+                            Database.update(posts.get(mPosition));
+                            tvLike.setTextColor(Color.parseColor("#161616"));
+                            ivLike.setImageResource(R.mipmap.dianzan);
+                            updateLike(posts.get(mPosition).getPostID(), !flagLike);
+                        }
+
+                    }
+                    else{
+                        tvLike.setText(String.valueOf(++likeNum));
+                        posts.get(mPosition).setLikeCount(posts.get(mPosition).getLikeCount()+1);
+                        Database.update(posts.get(mPosition));
+                        tvLike.setTextColor(Color.parseColor("#E21918"));
+                        ivLike.setImageResource(R.mipmap.dianzan_select);
+                        updateLike(posts.get(mPosition).getPostID(), !flagLike);
+                    }
+                    flagLike = !flagLike;
+                }
+            });
+
+            ivCollect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View v) {
+                    int collectNum = Integer.parseInt(tvCollect.getText().toString());
+                    if(flagCollect){
+                        if(collectNum>0){
+                            tvCollect.setText(String.valueOf(--collectNum));
+                            posts.get(mPosition).setCollectCount(posts.get(mPosition).getCollectCount()-1);
+                            Database.update(posts.get(mPosition));
+                            tvCollect.setTextColor(Color.parseColor("#161616"));
+                            ivCollect.setImageResource(R.mipmap.collect);
+                            updateCollect(posts.get(mPosition), !flagCollect);
+                        }
+
+                    }
+                    else{
+                        tvCollect.setText(String.valueOf(++collectNum));
+                        posts.get(mPosition).setCollectCount(posts.get(mPosition).getCollectCount()+1);
+                        Database.update(posts.get(mPosition));
+                        tvCollect.setTextColor(Color.parseColor("#E21918"));
+                        ivCollect.setImageResource(R.mipmap.collect_select);
+                        updateCollect(posts.get(mPosition),!flagCollect);
+                    }
+                    flagCollect = !flagCollect;
+                }
+            });
+
+
         }
+    }
+    private void updateLike(final String postID, final boolean flag){
+        FirebaseUser user = Database.mAuth.getCurrentUser();
+        if(user == null){
+            Toast.makeText(mContext,"Sign In Please!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, LogInActivity.class);
+            mContext.startActivity(intent);
+            return;
+        }
+        if(flag){
+            MeFragment.currentuser.addLike(postID);
+            Database.update(MeFragment.currentuser);
+            if(MeFragment.currentuser.postList.size()>0){
+                for(PostEntity post:MeFragment.currentuser.postList){
+                    if(post.getPostID().equals(postID)){
+                        post.setLikeCount(post.getLikeCount()+1);
+                    }
+                }
+            }
+        }
+        else{
+            if(MeFragment.currentuser.getLiked().size()>0){
+                MeFragment.currentuser.deleteLike(postID);
+            }
+            if(MeFragment.currentuser.postList.size()>0){
+                for(PostEntity post:MeFragment.currentuser.postList){
+                    if(post.getPostID().equals(postID)){
+                        post.setLikeCount(post.getLikeCount()-1);
+                    }
+                }
+            }
+        }
+        Database.update(MeFragment.currentuser);
+
+    }
+
+
+    private void updateCollect(final PostEntity postEntity, final boolean flag){
+        FirebaseUser user = Database.mAuth.getCurrentUser();
+        if(user == null){
+            Toast.makeText(mContext,"Sign In Please!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, LogInActivity.class);
+            mContext.startActivity(intent);
+            return;
+        }
+        if(flag){
+            MeFragment.currentuser.addCollect(postEntity);
+            Database.update(MeFragment.currentuser);
+            if(MeFragment.currentuser.postList.size()>0){
+                for(PostEntity post:MeFragment.currentuser.postList){
+                    if(post.getPostID().equals(postEntity.getPostID())){
+                        post.setCollectCount(post.getCollectCount()+1);
+                    }
+                }
+            }
+        }
+        else{
+            if(MeFragment.currentuser.getCollect().size()>0){
+                MeFragment.currentuser.deleteCollect(postEntity);
+            }
+            if(MeFragment.currentuser.postList.size()>0){
+                for(PostEntity post:MeFragment.currentuser.postList){
+                    if((post.getPostID()).equals(postEntity.getPostID())){
+                        post.setCollectCount(post.getCollectCount()-1);
+                    }
+                }
+            }
+        }
+        Database.update(MeFragment.currentuser);
+
+    }
+    private void checkLiked(final ViewHolder vh, final PostEntity postEntity){
+        FirebaseUser user = Database.mAuth.getCurrentUser();
+        if(user!=null){
+            final ValueEventListener userListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        UserEntity temp_user = dataSnapshot.getValue(UserEntity.class);
+                        if(temp_user.getLiked()!=null &&temp_user.getLiked().size()>0){
+                            for(String like : temp_user.getLiked()){
+                                if(like.equals(postEntity.getPostID())){
+//                                    Log.e("Like equals",like);
+                                    vh.flagLike=true;
+                                    vh.tvLike.setTextColor(Color.parseColor("#E21918"));
+                                    vh.ivLike.setImageResource(R.mipmap.dianzan_select);
+                                }
+                            }
+                        }
+                        Database.update(MeFragment.currentuser);
+//                        Log.e("CurrrentUSer like",String.valueOf(MeFragment.currentuser.getLiked().size()));
+                    }
+                    // ...
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
+                    // ...
+                }
+            };
+            Database.mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
+        }
+    }
+
+    private void checkCollect(final ViewHolder vh, final PostEntity postEntity){
+        FirebaseUser user = Database.mAuth.getCurrentUser();
+        if(user!=null){
+            final ValueEventListener userListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        UserEntity temp_user = dataSnapshot.getValue(UserEntity.class);
+                        if(temp_user.getCollect()!=null &&temp_user.getCollect().size()>0){
+                            for(PostEntity collect : temp_user.getCollect()){
+                                if((collect.getPostID()).equals(postEntity.getPostID())){
+//                                    Log.e("Like equals",collect.getPostID());
+                                    vh.flagCollect=true;
+                                    vh.tvCollect.setTextColor(Color.parseColor("#E21918"));
+                                    vh.ivCollect.setImageResource(R.mipmap.collect_select);
+                                }
+                            }
+                        }
+                        Database.update(MeFragment.currentuser);
+//                        Log.e("CurrrentUSer collect",String.valueOf(MeFragment.currentuser.getLiked().size()));
+                    }
+                    // ...
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
+                    // ...
+                }
+            };
+            Database.mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
+        }
+    }
+
+    public void filteredList(List<PostEntity> filteredList){
+        posts = filteredList;
+        notifyDataSetChanged();
     }
 }

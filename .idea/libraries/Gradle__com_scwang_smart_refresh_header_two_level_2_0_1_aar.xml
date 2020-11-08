@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.scwang.smart:refresh-header-two-level:2.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d07126185f754be158cc9df8ffe830b1/jetified-refresh-header-two-level-2.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d07126185f754be158cc9df8ffe830b1/jetified-refresh-header-two-level-2.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d07126185f754be158cc9df8ffe830b1/jetified-refresh-header-two-level-2.0.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0804d7baf95ececc56df2c7b452724e/jetified-refresh-header-two-level-2.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0804d7baf95ececc56df2c7b452724e/jetified-refresh-header-two-level-2.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0804d7baf95ececc56df2c7b452724e/jetified-refresh-header-two-level-2.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-header-two-level/2.0.1/61e4dd2408f09216313bee4d8dea549d31af67bb/refresh-header-two-level-2.0.1-javadoc.jar!/" />

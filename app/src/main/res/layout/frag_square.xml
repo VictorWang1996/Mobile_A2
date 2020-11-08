@@ -9,7 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/colorTransparent">
-
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/square_search"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_search"/>
         <TextView
             android:id="@+id/txt_topbar"
             android:layout_width="wrap_content"
@@ -35,11 +41,17 @@
             android:background="@color/colorGrey"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_search"
+        android:layout_below="@+id/ly_top_bar"
+        android:visibility="gone"/>
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ly_top_bar">
+        android:layout_below="@+id/et_search">
         <com.scwang.smart.refresh.header.BezierRadarHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

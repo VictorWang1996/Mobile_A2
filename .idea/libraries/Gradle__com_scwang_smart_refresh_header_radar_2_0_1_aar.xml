@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.scwang.smart:refresh-header-radar:2.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a671b72a0e52dc8c33466a7239298aa6/jetified-refresh-header-radar-2.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a671b72a0e52dc8c33466a7239298aa6/jetified-refresh-header-radar-2.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a671b72a0e52dc8c33466a7239298aa6/jetified-refresh-header-radar-2.0.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/19e6b66cafec74dffa8407c73e5d2585/jetified-refresh-header-radar-2.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/19e6b66cafec74dffa8407c73e5d2585/jetified-refresh-header-radar-2.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/19e6b66cafec74dffa8407c73e5d2585/jetified-refresh-header-radar-2.0.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-header-radar/2.0.1/221110d93070a4266d69615eaa672b1c8ac00e1d/refresh-header-radar-2.0.1-javadoc.jar!/" />

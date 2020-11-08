@@ -159,7 +159,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 //                    Map<String, PostEntity> map = dataSnapshot.getValue(genericTypeIndicator);
                     UserEntity load_user = dataSnapshot.getValue(UserEntity.class);
                     currentuser = new UserEntity(load_user);
-//                    Log.e("Me",currentuser.toString());
                     List<PostEntity> posts = new ArrayList<>();
                     if(load_user.postList!= null && load_user.postList.size()>0){
                         for(PostEntity key : load_user.postList){
@@ -176,8 +175,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     UserPostAdapter postAdapter = new UserPostAdapter(getActivity(),posts);
                     mRecyclerview.setAdapter(postAdapter);
                 }
-//                Log.e("Me233",currentuser.toString());
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

@@ -2,11 +2,15 @@ package com.example.assignment2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +47,10 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
     private ImageButton btn_sendPost;
     private RecyclerView mRecyclerview;
     private SmartRefreshLayout mRefreshLayout;
+    private ImageButton ib_search;
+    private EditText et_search;
+    private PostAdapter postAdapter;
+    private List<PostEntity> postList;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,6 +58,26 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
         btn_sendPost = view.findViewById(R.id.btn_sendpost);
         mRecyclerview = view.findViewById(R.id.recyclerview);
         mRefreshLayout = view.findViewById(R.id.refreshlayout);
+        ib_search = view.findViewById(R.id.square_search);
+        ib_search.setOnClickListener(this);
+        et_search = view.findViewById(R.id.et_search);
+        postList = new ArrayList<>();
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -64,6 +92,7 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(),"No more data available!",Toast.LENGTH_SHORT).show();
             }
         });
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(linearLayoutManager);
@@ -71,6 +100,20 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
         loadPosts();
         setClickListener();
         return view;
+    }
+
+    private void filter(String s){
+        List<PostEntity> filteredList = new ArrayList<>();
+        for(PostEntity post : postList){
+//            Log.e("UserName",post.getUserID());
+//            if(post.getUserID().toLowerCase().contains(s.toLowerCase())){
+//                filteredList.add(post);
+//            }
+            if(post.getPostText().toLowerCase().contains(s.toLowerCase())){
+                filteredList.add(post);
+            }
+        }
+        postAdapter.filteredList(filteredList);
     }
 
     private void loadPosts(){
@@ -93,7 +136,10 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
                             return -postEntity.getPostTime().compareTo(t1.getPostTime());
                         }
                     });
-                    PostAdapter postAdapter = new PostAdapter(getActivity(),posts);
+
+
+                    postList=posts;
+                    postAdapter = new PostAdapter(getActivity(),posts);
                     mRecyclerview.setAdapter(postAdapter);
                 }
             }
@@ -123,6 +169,15 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
 //                    Database.loadCurrentUser(getContext());
                     intent = new Intent(getActivity(), SendPostActivity.class);
                     startActivity(intent);
+                }
+                break;
+            case R.id.square_search:
+                if(et_search.getVisibility()==View.GONE){
+                    et_search.setVisibility(View.VISIBLE);
+                }
+                else if(et_search.getVisibility()==View.VISIBLE){
+                    et_search.setText("");
+                    et_search.setVisibility(View.GONE);
                 }
                 break;
         }

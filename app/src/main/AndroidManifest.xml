@@ -8,10 +8,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-    <uses-feature android:name="android.hardware.location.network"/>
-    <uses-feature android:name="android.hardware.location.gps"/>
-
+    <uses-feature android:name="android.hardware.location.network" />
+    <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -23,14 +21,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.EditProfileActivity"></activity>
+        <activity android:name=".activity.MyCollectionActivity"></activity>
+        <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".imageTest.GridImageActivity" />
         <activity android:name=".activity.ReadImageActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.LogInActivity" />
         <activity
             android:name=".activity.SendPostActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

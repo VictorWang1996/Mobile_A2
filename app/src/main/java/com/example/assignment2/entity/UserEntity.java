@@ -14,6 +14,7 @@ public class UserEntity {
     private String header="";
     public List<PostEntity> postList;
     private List<String> liked;
+    private List<PostEntity> collect;
 //    private String password;
 
     public UserEntity(){
@@ -31,10 +32,12 @@ public class UserEntity {
         this.header = "";
         this.postList = new ArrayList<>();
         this.liked = new ArrayList<>();
+        this.collect = new ArrayList<>();
 //        this.password = password;
     }
 
-    public UserEntity(String id, String username, String location,String email, String phone, String sex, String age, String header, List<PostEntity> postList, List<String> liked){
+    public UserEntity(String id, String username, String location,String email, String phone, String sex, String age, String header,
+                      List<PostEntity> postList, List<String> liked, List<PostEntity> collect){
         this.id = id;
         this.username = username;
         this.email = email;
@@ -47,6 +50,8 @@ public class UserEntity {
         this.sex = sex;
         this.liked = new ArrayList<>();
         this.liked = liked;
+        this.collect = new ArrayList<>();
+        this.collect = collect;
         //this.postList.addAll(postList);
 
     }
@@ -64,6 +69,8 @@ public class UserEntity {
         this.header = user.getHeader();
         this.liked = new ArrayList<>();
         this.liked = user.getLiked();
+        this.collect = new ArrayList<>();
+        this.collect = user.collect;
 
     }
 
@@ -83,6 +90,34 @@ public class UserEntity {
             liked = new ArrayList<>();
         }
         liked.add(postID);
+    }
+    public void deleteLike(String postID){
+        if(liked.size()>0){
+            liked.remove(postID);
+        }
+    }
+
+
+    public List<PostEntity> getCollect(){
+        return this.collect;
+    }
+    public void setCollect(List<PostEntity> collect){
+        if(this.collect ==null){
+            this.collect = new ArrayList<>();
+        }
+        this.collect = collect;
+    }
+
+    public void addCollect(PostEntity post){
+        if(collect == null){
+            collect = new ArrayList<>();
+        }
+        collect.add(post);
+    }
+    public void deleteCollect(PostEntity post){
+        if(collect.size()>0){
+            collect.remove(post);
+        }
     }
 
     public void addPost(PostEntity post){
