@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.assignment2.R;
+import com.example.assignment2.utils.Database;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -97,6 +98,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Log.d("SignUpActivity", "createUserWithEmail:success");
 
                             FirebaseUser account = mAuth.getCurrentUser();
+                            Database.createUser();
                             sendEmailVerification(account);
                             mAuth.signOut();
                             Intent toSignIn = new Intent(SignUpActivity.this, LogInActivity.class);

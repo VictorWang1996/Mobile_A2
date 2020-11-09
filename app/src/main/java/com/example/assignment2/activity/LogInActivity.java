@@ -26,7 +26,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_signUp;
     private TextView mEmail;
     private TextView mPassword;
-    private static boolean flag;
     FirebaseAuth mAuth;
     DatabaseReference mFdatabase;
     @Override
@@ -40,13 +39,16 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mAuth = Database.mAuth;
-        flag = false;
         mFdatabase = FirebaseDatabase.getInstance().getReference();
-
     }
 
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void signIn() {
@@ -93,17 +95,15 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                                 mEmail.setError(null);
                             }
                             //check if the user has been store into the database;
-                            Database.createUser();
-                            flag = true;
-//                            Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
+                            Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
+                            startActivity(toMain);
+                            Toast.makeText(LogInActivity.this,"Log In Success!", Toast.LENGTH_SHORT).show();
 
-//
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("LogIn", "signInWithEmail:failure", task.getException());
                             Toast.makeText(LogInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
                         }
 
                         // ...
@@ -121,13 +121,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 return;
             case R.id.btn_login:
                 signIn();
-                if(flag){
-                    Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
-                    startActivity(toMain);
-                }
                 return;
-
-
         }
     }
 }
