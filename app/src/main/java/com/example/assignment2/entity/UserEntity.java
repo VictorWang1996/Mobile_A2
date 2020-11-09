@@ -116,7 +116,11 @@ public class UserEntity {
     }
     public void deleteCollect(PostEntity post){
         if(collect.size()>0){
-            collect.remove(post);
+            for(PostEntity p:collect){
+                if(post.getPostID().equals(p.getPostID())){
+                    collect.remove(p);
+                }
+            }
         }
     }
 
@@ -157,7 +161,4 @@ public class UserEntity {
         return username+" "+email;
     }
 
-//    public void setPassword(String password){
-//        this.password = password;
-//    }
 }

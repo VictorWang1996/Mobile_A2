@@ -90,7 +90,6 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
        grantPermission();
        checkLocationEnabled();
        getLocation();
-        //getWindow().setSoftInputMode(getWindowManager().LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
     private void init(){
         send = findViewById(R.id.btn_send);
@@ -108,13 +107,12 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         mImageAdapter = new ImageAdapter(SendPostActivity.this, imageUris, new ImageAdapter.OnItemClickListener() {
             @Override
             public void onTakePhotoClick() {
-                // 点击图片，放大图片
                 Toast.makeText(SendPostActivity.this,"Click on photo",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                //长按删除图片
+                //Long Click delete
                 Toast.makeText(SendPostActivity.this,"ready to delete",Toast.LENGTH_SHORT).show();
                 imageUris.remove(position);
                 mImageAdapter.notifyDataSetChanged();
@@ -192,10 +190,16 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 pickImageFromAlbum();
                 break;
             case R.id.btn_post_at:
-                content.setText(content.getText().toString()+"@");
+                EditText at = content;
+                int start1 = at.getSelectionStart();
+                Editable editable1 = at.getEditableText();
+                editable1.insert(start1, "@");
                 break;
             case R.id.btn_post_hash:
-                content.setText(content.getText().toString()+"#");
+                EditText hash = content;
+                int start2 = hash.getSelectionStart();
+                Editable editable2 = hash.getEditableText();
+                editable2.insert(start2, "#");
                 break;
         }
     }
@@ -212,9 +216,6 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+11"));
         String postTime = simpleDateFormat.format(new Date());
-//        grantPermission();
-//        checkLocationEnabled();
-//        getLocation();
         PostEntity post = new PostEntity(Database.mAuth.getUid()+"-"+postTime, MeFragment.currentuser.getUsername(), postTime,postText,this.address,MeFragment.currentuser.getHeader(),cloudPath);
         Log.e("Send list", String.valueOf(post.getPostImgPath().size()));
         Log.e("test1",this.address);
@@ -380,13 +381,6 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 this.address = country+", "+adminArea+", "+locality;
                 Log.e("L",this.address);
                 System.out.println(this.address);
-//                tvState.setText(addressList.get(0).getAdminArea() );
-//                tvCity.setText(addressList.get(0).getLocality());
-//                tvPin.setText(addressList.get(0).getPostalCode());
-//                tvAds.setText(addressList.get(0).getAddressLine(0));
-
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

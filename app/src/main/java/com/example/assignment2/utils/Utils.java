@@ -16,9 +16,6 @@ public final class Utils {
     }
 
 
-    /**
-     * 获取当前的播放核心
-     */
     public static Object getCurrentPlayerFactory() {
         VideoViewConfig config = VideoViewManager.getConfig();
         Object playerFactory = null;
@@ -32,9 +29,6 @@ public final class Utils {
         return playerFactory;
     }
 
-    /**
-     * 将View从父控件中移除
-     */
     public static void removeViewFormParent(View v) {
         if (v == null) return;
         ViewParent parent = v.getParent();

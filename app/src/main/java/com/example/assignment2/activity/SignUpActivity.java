@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_signUp;
-//    private EditText edt_username;
     private EditText edt_email;
     private EditText edt_password;
     private FirebaseAuth mAuth;
@@ -38,19 +37,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void sendEmailVerification(final FirebaseUser user) {
-        // Disable button
-//        mBinding.verifyEmailButton.setEnabled(false);
-
         // Send verification email
         // [START send_email_verification]
-//        final FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // [START_EXCLUDE]
                         // Re-enable button
-//                        mBinding.verifyEmailButton.setEnabled(true);
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this,
                                     "Verification email sent to " + user.getEmail(),
@@ -66,16 +60,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 });
         // [END send_email_verification]
     }
+
+    //createAccount Auth
     private void createAccount() {
-//        final String username = edt_username.getText().toString().trim();
         final String email = edt_email.getText().toString().trim();
         final String password = edt_password.getText().toString().trim();
         Log.d("SignUpActivity", "createAccount:" + email);
-//        if(username.isEmpty()){
-//            edt_username.setError("Username is required!");
-//            edt_username.requestFocus();
-//            return;
-//        }
         if(email.isEmpty()){
             edt_email.setError("Email is required!");
             edt_email.requestFocus();
@@ -97,8 +87,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-//        showProgressBar();
-
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -113,35 +101,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             mAuth.signOut();
                             Intent toSignIn = new Intent(SignUpActivity.this, LogInActivity.class);
                             startActivity(toSignIn);
-//                            User user = new User(account.getUid(),username,email,password);
-//                            updateUI(user);
-//                            sendEmailVerification(account);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("SignUpActivity", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
                         }
-
-                        // [START_EXCLUDE]
-//                        hideProgressBar();
-                        // [END_EXCLUDE]
                     }
                 });
         // [END create_user_with_email]
     }
 
-//    private boolean
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_register:
                 createAccount();
-//                Intent toSignIn = new Intent(SignUpActivity.this, LogInActivity.class);
-//                startActivity(toSignIn);
 
         }
     }

@@ -170,14 +170,18 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                 dispatchTakeVideoIntent();
                 break;
             case R.id.btn_At:
-                content.setText(content.getText().toString()+"@");
+                EditText at = content;
+                int start1 = at.getSelectionStart();
+                Editable editable1 = at.getEditableText();
+                editable1.insert(start1, "@");
                 break;
             case R.id.btn_hash:
-                content.setText(content.getText().toString()+"#");
+                EditText hash = content;
+                int start2 = hash.getSelectionStart();
+                Editable editable2 = hash.getEditableText();
+                editable2.insert(start2, "#");
                 break;
-//            case R.id.btn_local_video:
-//                pickVideoFromAlbum();
-//                break;
+
 
         }
     }
@@ -198,13 +202,7 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+11"));
         String postTime = simpleDateFormat.format(new Date());
-//        grantPermission();
-//        checkLocationEnabled();
-//        getLocation();
         VideoEntity video = new VideoEntity(Database.mAuth.getUid()+"-"+postTime, MeFragment.currentuser.getUsername(), postTime,postText,this.address, MeFragment.currentuser.getHeader(),videoPath,coverUrl);
-        //Log.e("Send list", String.valueOf(post.getPostImgPath().size()));
-       // Database.update(post);
-        //MeFragment.currentuser.addPost(post);
         Database.update(video);
         Toast.makeText(SendVideoActivity.this,"already send",Toast.LENGTH_SHORT).show();
     }
@@ -221,7 +219,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
             }
             // Continue only if the File was successfully created
             if (videoFile != null) {
-//                photoURI = Uri.fromFile(photoFile);
                 videoURI = FileProvider.getUriForFile(this,
                         "com.example.assignment2.fileprovider",
                         videoFile);
@@ -243,7 +240,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-//                photoURI = Uri.fromFile(photoFile);
                 coverURI = FileProvider.getUriForFile(this,
                         "com.example.assignment2.fileprovider",
                         photoFile);
@@ -300,7 +296,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,"video/*");
-        //intent.setType("video/*");
         startActivityForResult(intent,LOCAL_VIDEO_GET);
     }
     public void pickImageFromAlbum() {
@@ -318,7 +313,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         switch (requestCode){
             case TAKE_PHOTO_CODE:
                 if (resultCode == RESULT_OK){
-                    //showPicture.setImageURI(photoURI);
                     ivCoverVideo.setImageURI(coverURI);
                     ivCoverVideo.setVisibility(View.VISIBLE);
                     if (videoURI!=null){
@@ -341,7 +335,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                 break;
             case  REQUEST_VIDEO_CAPTURE:
                 if (resultCode == RESULT_OK){
-                    //videoURI = data.getData();
                     videoView.setVideoURI(videoURI);
                     videoView.setVisibility(View.VISIBLE);
                     videoView.seekTo( 1 );
@@ -360,10 +353,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                     videoView.setVideoURI(videoURI);
                     videoView.setVisibility(View.VISIBLE);
                     videoView.seekTo( 1 );
-//                    if(coverURI==null){
-//                        Bitmap bm = getVideoThumb(videoURI.getPath());
-//                        coverURI =Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bm, null,null));
-//                    }
                     MediaController mediaController = new MediaController(this);
                     videoView.setMediaController(mediaController);
                     mediaController.setAnchorView(videoView);
@@ -444,13 +433,6 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                 this.address = country+", "+adminArea+", "+locality;
                 Log.e("L",this.address);
                 System.out.println(this.address);
-//                tvState.setText(addressList.get(0).getAdminArea() );
-//                tvCity.setText(addressList.get(0).getLocality());
-//                tvPin.setText(addressList.get(0).getPostalCode());
-//                tvAds.setText(addressList.get(0).getAddressLine(0));
-
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

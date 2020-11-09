@@ -159,7 +159,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private void loadUserPosts(){
         FirebaseUser user = Database.mAuth.getCurrentUser();
         if(user==null){
-//            Toast.makeText(getContext(),"Sign In Please!", Toast.LENGTH_SHORT).show();
             Log.d("Load Post:", "no user");
             return;
         }
@@ -168,16 +167,12 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    //dataSnapshot.getValue() get a hashMap type
-//                    GenericTypeIndicator<Map<String, PostEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, PostEntity>>() {};
-//                    Map<String, PostEntity> map = dataSnapshot.getValue(genericTypeIndicator);
                     UserEntity load_user = dataSnapshot.getValue(UserEntity.class);
                     currentuser = new UserEntity(load_user);
                     List<PostEntity> posts = new ArrayList<>();
                     if(load_user.postList!= null && load_user.postList.size()>0){
                         for(PostEntity key : load_user.postList){
                             posts.add(key);
-//                            Log.e("ME Add", String.valueOf(posts.size()));
                         }
                         Collections.sort(posts, new Comparator<PostEntity>() {
                             @Override
@@ -232,8 +227,12 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 }
                 return;
             case R.id.iv_myCollection:
-                Intent toCollection = new Intent(getActivity(), MyCollectionActivity.class);
-                startActivity(toCollection);
+                if(MeFragment.currentuser.getCollect()!= null && MeFragment.currentuser.getCollect().size()>0){
+                    Intent toCollection = new Intent(getActivity(), MyCollectionActivity.class);
+                    startActivity(toCollection);
+                }else{
+                    Toast.makeText(getContext(),"No Collections!", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
 

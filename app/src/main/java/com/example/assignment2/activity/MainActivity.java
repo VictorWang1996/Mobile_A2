@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTabRadioGroup = findViewById(R.id.rg_navigation_tab);
         rb_square = findViewById(R.id.rb_square);
         rb_me = findViewById(R.id.rb_me);
-        //rb_search = findViewById(R.id.rb_search);
         rb_video = findViewById(R.id.rb_video);
         // init fragment
         mFragments = new ArrayList<>(3);
@@ -63,12 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // adjust navigation tab size
         setNavigationSize(rb_me);
         setNavigationSize(rb_square);
-//        setNavigationSize(rb_search);
         setNavigationSize(rb_video);
         //set the first page
         rb_square.setChecked(true);
-        //current user
-//        Database.loadCurrentUser();
     }
 
     private void setNavigationSize(RadioButton rb){

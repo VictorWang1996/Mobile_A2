@@ -4,12 +4,17 @@
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/03c9b2f3eb440693f1f79d33710b64fc/jetified-extension-rtmp-2.11.3/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/03c9b2f3eb440693f1f79d33710b64fc/jetified-extension-rtmp-2.11.3/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/03c9b2f3eb440693f1f79d33710b64fc/jetified-extension-rtmp-2.11.3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03c9b2f3eb440693f1f79d33710b64fc/jetified-extension-rtmp-2.11.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03c9b2f3eb440693f1f79d33710b64fc/jetified-extension-rtmp-2.11.3/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03c9b2f3eb440693f1f79d33710b64fc/jetified-extension-rtmp-2.11.3/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-rtmp/2.11.3/5c38b617cbe15eb1a639a070ff1774ffeb480ef5/extension-rtmp-2.11.3-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-rtmp/2.11.3/5c38b617cbe15eb1a639a070ff1774ffeb480ef5/extension-rtmp-2.11.3-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-rtmp/2.11.3/9a4e4579da5befb97cf79bba359f535a94a870ff/extension-rtmp-2.11.3-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-rtmp/2.11.3/9a4e4579da5befb97cf79bba359f535a94a870ff/extension-rtmp-2.11.3-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

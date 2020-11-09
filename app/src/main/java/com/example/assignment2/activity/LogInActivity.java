@@ -26,6 +26,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_signUp;
     private TextView mEmail;
     private TextView mPassword;
+    private static boolean flag;
     FirebaseAuth mAuth;
     DatabaseReference mFdatabase;
     @Override
@@ -39,6 +40,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mAuth = Database.mAuth;
+        flag = false;
         mFdatabase = FirebaseDatabase.getInstance().getReference();
 
     }
@@ -92,8 +94,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                             }
                             //check if the user has been store into the database;
                             Database.createUser();
-                            Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
-                            startActivity(toMain);
+                            flag = true;
 //                            Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
 
 //
@@ -120,8 +121,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 return;
             case R.id.btn_login:
                 signIn();
-//                Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
-//                startActivity(toMain);
+                if(flag){
+                    Intent toMain = new Intent(LogInActivity.this, MainActivity.class);
+                    startActivity(toMain);
+                }
                 return;
 
 

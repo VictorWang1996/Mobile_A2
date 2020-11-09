@@ -69,7 +69,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         phone = findViewById(R.id.et_phone);
         male = findViewById(R.id.rb_male);
         female = findViewById(R.id.rb_female);
-//        email = findViewById(R.id.email);
         image = findViewById(R.id.image_view);
         location = findViewById(R.id.et_location);
         male = findViewById(R.id.rb_male);
@@ -80,7 +79,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         picture.setOnClickListener(this);
         camera = findViewById(R.id.ed_camera);
         camera.setOnClickListener(this);
-//        UserEntity user = new UserEntity(MeFragment.currentuser);
         if(MeFragment.currentuser.getHeader()!=null&&!MeFragment.currentuser.getHeader().equals("")){
             Database.download_headerImage(MeFragment.currentuser.getHeader(),EditProfileActivity.this,image);
 
@@ -146,7 +144,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 storageDir      /* directory */
         );
         // Save a file: path for use with ACTION_VIEW intents
-//        currentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
@@ -160,8 +157,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void addImage(){
         Picasso.with(EditProfileActivity.this).load(imguri).transform(new CircleTransform()).into(image);
-
-//        image.setImageURI(imguri);
     }
 
     @Override
@@ -170,14 +165,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         switch (requestCode){
             case TAKE_PHOTO_CODE:
                 if (resultCode == RESULT_OK){
-                    //showPicture.setImageURI(photoURI);
                     addImage();
                 }
                 break;
             case SELECT_IMAGE_CODE:
                 if (resultCode == RESULT_OK && data!=null){
                     imguri = data.getData();
-                    //showPicture.setImageURI(photoURI);
                     addImage();
                 }
             default:
@@ -198,10 +191,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         Database.upload_header(imguri,EditProfileActivity.this);
 
         Toast.makeText(EditProfileActivity.this,"Update",Toast.LENGTH_SHORT).show();
-//        List<PostEntity> userposts = new ArrayList<>();
         List<PostEntity> newPostList = new ArrayList<>();
-//        userposts = MeFragment.currentuser.postList;
-//        Log.e("size",String.valueOf(userposts.size()));
         Log.e("currentuser", MeFragment.currentuser.toString());
 
         if(MeFragment.currentuser.postList.size()>0){

@@ -105,10 +105,6 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
     private void filter(String s){
         List<PostEntity> filteredList = new ArrayList<>();
         for(PostEntity post : postList){
-//            Log.e("UserName",post.getUserID());
-//            if(post.getUserID().toLowerCase().contains(s.toLowerCase())){
-//                filteredList.add(post);
-//            }
             if(post.getPostText().toLowerCase().contains(s.toLowerCase())){
                 filteredList.add(post);
             }
@@ -123,14 +119,11 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    //dataSnapshot.getValue() get a hashMap type
-                    //Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue(Map.class);
                     GenericTypeIndicator<Map<String, PostEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, PostEntity>>() {};
                     Map<String, PostEntity> map = dataSnapshot.getValue(genericTypeIndicator);
                     List<PostEntity> posts = new ArrayList<>();
                     for(PostEntity key:map.values()){
                         posts.add(key);
-//                        Log.e("Add", String.valueOf(posts.size()));
                     }
                     Collections.sort(posts, new Comparator<PostEntity>() {
                         @Override
@@ -168,7 +161,6 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
                     intent  = new Intent(getActivity(), LogInActivity.class);
                     startActivity(intent);
                 }else{
-//                    Database.loadCurrentUser(getContext());
                     intent = new Intent(getActivity(), SendPostActivity.class);
                     startActivity(intent);
                 }

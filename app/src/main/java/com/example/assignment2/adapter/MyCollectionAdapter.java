@@ -53,14 +53,12 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         final PostEntity postEntity = posts.get(position);
-//        Log.e("Posts size",String.valueOf(posts.size()));
         vh.tvAuthor.setText(postEntity.getUserID());
         vh.tvTime.setText(postEntity.getPostTime());
         vh.tvComment.setText(String.valueOf(postEntity.getCommentCount()));
         vh.tvCollect.setText(String.valueOf(postEntity.getCollectCount()));
         vh.tvLike.setText(String.valueOf(postEntity.getLikeCount()));
         vh.mPosition = position;
-//        vh.flagLike = false;
         checkLiked(vh,postEntity);
         checkCollect(vh,postEntity);
 
@@ -68,7 +66,6 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(postEntity.getLocation()!=null&&!postEntity.getLocation().equals("")){
             vh.tvLocation.setVisibility(View.VISIBLE);
             vh.tvLocation.setText(postEntity.getLocation());
-//            Log.e("Location2",vh.tvLocation.getText().toString());
         }
 
         if(postEntity.getHeader()!=null && !postEntity.getHeader().equals("")){
@@ -81,19 +78,17 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             vh.tvPostContent.setVisibility(View.VISIBLE);
         }
         int columnCount= vh.gridLayout.getColumnCount();//get column
-//        int marginSize = PixelUtils.dp2px(mContext, 4);//得到经过dp转化的margin值
     if (postEntity.getPostImgPath()!=null && postEntity.getPostImgPath().size()!=0){
 
         for (int i = 0; i < postEntity.getPostImgPath().size(); i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//rows
-            GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
+            GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);
             ImageView imageView = new SquareImageView(mContext);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
             layoutParams.rowSpec = rowSpec;
             layoutParams.columnSpec = columnSpec;
             Database.download_image(postEntity.getPostImgPath().get(i), mContext, imageView);
-//            layoutParams.setMargins(marginSize, marginSize, marginSize, marginSize);
             vh.gridLayout.addView(imageView, layoutParams);
         }
         vh.gridLayout.setVisibility(View.VISIBLE);
@@ -132,8 +127,6 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             gridLayout = View.findViewById(R.id.collect_user_gridlayout_post);
             ivLike = View.findViewById(R.id.collect_user_img_like);
             ivCollect = View.findViewById(R.id.collect_user_img_collect);
-//            flagCollect = false;
-//            flagLike = false;
             ivLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(android.view.View v) {
@@ -202,14 +195,14 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(flag){
             MeFragment.currentuser.addLike(postID);
             Database.update(MeFragment.currentuser);
-            if(MeFragment.currentuser.postList.size()>0){
+            if(MeFragment.currentuser.postList!=null && MeFragment.currentuser.postList.size()>0){
                 for(PostEntity post:MeFragment.currentuser.postList){
                     if(post.getPostID().equals(postID)){
                         post.setLikeCount(post.getLikeCount()+1);
                     }
                 }
             }
-            if(MeFragment.currentuser.getCollect().size()>0){
+            if(MeFragment.currentuser.getCollect()!=null && MeFragment.currentuser.getCollect().size()>0){
                 for(PostEntity post:MeFragment.currentuser.getCollect()){
                     if(post.getPostID().equals(postID)){
                         post.setLikeCount(post.getLikeCount()+1);
@@ -221,14 +214,14 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(MeFragment.currentuser.getLiked().size()>0){
                 MeFragment.currentuser.deleteLike(postID);
             }
-            if(MeFragment.currentuser.postList.size()>0){
+            if(MeFragment.currentuser.postList!=null && MeFragment.currentuser.postList.size()>0){
                 for(PostEntity post:MeFragment.currentuser.postList){
                     if(post.getPostID().equals(postID)){
                         post.setLikeCount(post.getLikeCount()-1);
                     }
                 }
             }
-            if(MeFragment.currentuser.getCollect().size()>0){
+            if(MeFragment.currentuser.getCollect()!=null && MeFragment.currentuser.getCollect().size()>0){
                 for(PostEntity post:MeFragment.currentuser.getCollect()){
                     if(post.getPostID().equals(postID)){
                         post.setLikeCount(post.getLikeCount()-1);
@@ -252,7 +245,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if(flag){
             MeFragment.currentuser.addCollect(postEntity);
             Database.update(MeFragment.currentuser);
-            if(MeFragment.currentuser.postList.size()>0){
+            if(MeFragment.currentuser.postList!=null && MeFragment.currentuser.postList.size()>0){
                 for(PostEntity post:MeFragment.currentuser.postList){
                     if(post.getPostID().equals(postEntity.getPostID())){
                         post.setCollectCount(post.getCollectCount()+1);
@@ -264,7 +257,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if(MeFragment.currentuser.getCollect().size()>0){
                 MeFragment.currentuser.deleteCollect(postEntity);
             }
-            if(MeFragment.currentuser.postList.size()>0){
+            if(MeFragment.currentuser.postList!=null && MeFragment.currentuser.postList.size()>0){
                 for(PostEntity post:MeFragment.currentuser.postList){
                     if((post.getPostID()).equals(postEntity.getPostID())){
                         post.setCollectCount(post.getCollectCount()-1);
@@ -286,7 +279,6 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if(temp_user.getLiked()!=null &&temp_user.getLiked().size()>0){
                             for(String like : temp_user.getLiked()){
                                 if(like.equals(postEntity.getPostID())){
-//                                    Log.e("Like equals",like);
                                     vh.flagLike=true;
                                     vh.tvLike.setTextColor(Color.parseColor("#E21918"));
                                     vh.ivLike.setImageResource(R.mipmap.dianzan_select);
@@ -294,7 +286,6 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             }
                         }
                         Database.update(MeFragment.currentuser);
-//                        Log.e("CurrrentUSer like",String.valueOf(MeFragment.currentuser.getLiked().size()));
                     }
                     // ...
                 }
@@ -320,7 +311,6 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         if(temp_user.getCollect()!=null &&temp_user.getCollect().size()>0){
                             for(PostEntity collect : temp_user.getCollect()){
                                 if((collect.getPostID()).equals(postEntity.getPostID())){
-//                                    Log.e("Like equals",collect.getPostID());
                                     vh.flagCollect=true;
                                     vh.tvCollect.setTextColor(Color.parseColor("#E21918"));
                                     vh.ivCollect.setImageResource(R.mipmap.collect_select);
@@ -328,7 +318,6 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             }
                         }
                         Database.update(MeFragment.currentuser);
-//                        Log.e("CurrrentUSer collect",String.valueOf(MeFragment.currentuser.getLiked().size()));
                     }
                     // ...
                 }

@@ -69,13 +69,9 @@ public class VideoFragment extends Fragment implements View.OnClickListener
 
 
     private List<VideoEntity> videos = new ArrayList<>();
-    /**
-     * 当前播放的位置
-     */
+
     protected int mCurPos = -1;
-    /**
-     * 上次播放的位置，用于页面切回来之后恢复播放
-     */
+
     protected int mLastPos = mCurPos;
     public void initView(){
         initVideoView();
@@ -130,7 +126,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener
         mVideoView.setOnStateChangeListener(new VideoView.SimpleOnStateChangeListener() {
             @Override
             public void onPlayStateChanged(int playState) {
-                //监听VideoViewManager释放，重置状态
+                //Listen VideoViewManager Release
                 if (playState == VideoView.STATE_IDLE) {
                     Utils.removeViewFormParent(mVideoView);
                     mLastPos = mCurPos;
@@ -161,10 +157,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener
         pause();
     }
 
-    /**
-     * 由于onPause必须调用super。故增加此方法，
-     * 子类将会重写此方法，改变onPause的逻辑
-     */
+
     protected void pause() {
         releaseVideoView();
     }
@@ -175,45 +168,29 @@ public class VideoFragment extends Fragment implements View.OnClickListener
         resume();
     }
 
-    /**
-     * 由于onResume必须调用super。故增加此方法，
-     * 子类将会重写此方法，改变onResume的逻辑
-     */
+
     protected void resume() {
         if (mLastPos == -1)
             return;
 
-        //恢复上次播放的位置
         startPlay(mLastPos);
     }
 
-    /**
-     * PrepareView被点击
-     */
-
-    /**
-     * 开始播放
-     * @param position 列表位置
-     */
     protected void startPlay(int position) {
         if (mCurPos == position) return;
         if (mCurPos != -1) {
             releaseVideoView();
         }
         VideoEntity videoEntity = videos.get(position);
-        //边播边存
-//        String proxyUrl = ProxyVideoCacheManager.getProxy(getActivity()).getProxyUrl(videoBean.getUrl());
-//        mVideoView.setUrl(proxyUrl);
+
         mVideoView.setUrl(videoEntity.getVideoPath());
         mTitleView.setTitle(videoEntity.getPostText());
         View itemView = mLinearLayoutManager.findViewByPosition(position);
         if (itemView == null) return;
         VideoAdapter.ViewHolder viewHolder = (VideoAdapter.ViewHolder) itemView.getTag();
-        //把列表中预置的PrepareView添加到控制器中，注意isPrivate此处只能为true。
         mController.addControlComponent(viewHolder.mPrepareView, true);
         Utils.removeViewFormParent(mVideoView);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
-        //播放之前将VideoView添加到VideoViewManager以便在别的页面也能操作它
         getVideoViewManager().add(mVideoView, Tag.LIST);
         mVideoView.start();
         mCurPos = position;
@@ -235,12 +212,8 @@ public class VideoFragment extends Fragment implements View.OnClickListener
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    //dataSnapshot.getValue() get a hashMap type
-                    //Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue(Map.class);
                     GenericTypeIndicator<Map<String, VideoEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, VideoEntity>>() {};
                     Map<String, VideoEntity> map = dataSnapshot.getValue(genericTypeIndicator);
-                    //List<VideoEntity> videos = new ArrayList<>();
-                    //                        Log.e("Add", String.valueOf(posts.size()));
                     videos.clear();
                     videos.addAll(map.values());
                     Collections.sort(videos, new Comparator<VideoEntity>() {
@@ -287,7 +260,6 @@ public class VideoFragment extends Fragment implements View.OnClickListener
                     intent  = new Intent(getActivity(), LogInActivity.class);
                     startActivity(intent);
                 }else{
-//                    Database.loadCurrentUser(getContext());
                     intent = new Intent(getActivity(), SendVideoActivity.class);
                     startActivity(intent);
                 }

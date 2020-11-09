@@ -4,12 +4,17 @@
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/de55067ddd8b6ca875c478df02eb33ad/jetified-player-exo-3.2.6/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/de55067ddd8b6ca875c478df02eb33ad/jetified-player-exo-3.2.6/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-2/files-2.1/de55067ddd8b6ca875c478df02eb33ad/jetified-player-exo-3.2.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/de55067ddd8b6ca875c478df02eb33ad/jetified-player-exo-3.2.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/de55067ddd8b6ca875c478df02eb33ad/jetified-player-exo-3.2.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/de55067ddd8b6ca875c478df02eb33ad/jetified-player-exo-3.2.6/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.github.dueeeke.dkplayer/player-exo/3.2.6/ddb52bfec702cf979eb5b66a8ec71bfe7ae8dc31/player-exo-3.2.6-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dueeeke.dkplayer/player-exo/3.2.6/ddb52bfec702cf979eb5b66a8ec71bfe7ae8dc31/player-exo-3.2.6-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../.gradle/caches/modules-2/files-2.1/com.github.dueeeke.dkplayer/player-exo/3.2.6/25593b9b4b88b887aaef4c547b42ac41bff543b/player-exo-3.2.6-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.dueeeke.dkplayer/player-exo/3.2.6/25593b9b4b88b887aaef4c547b42ac41bff543b/player-exo-3.2.6-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

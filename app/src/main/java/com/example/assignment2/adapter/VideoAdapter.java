@@ -56,16 +56,12 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         vh.tvComment.setText(String.valueOf(videoEntity.getCommentCount()));
         vh.tvCollect.setText(String.valueOf(videoEntity.getCollectCount()));
         vh.tvLike.setText(String.valueOf(videoEntity.getLikeCount()));
-//        Log.e("Location", postEntity.getLocation());
         if(videoEntity.getLocation()!=null&&!videoEntity.getLocation().equals("")){
             vh.tvLocation.setVisibility(View.VISIBLE);
             vh.tvLocation.setText(videoEntity.getLocation());
-//            Log.e("Location2",vh.tvLocation.getText().toString());
         }
         if(videoEntity.getHeader()!=null && !videoEntity.getHeader().equals("")){
-            //Picasso.with(mContext).load(videoEntity.getHeader()).transform(new CircleTransform()).into(vh.ivHeader);
             Database.download_headerImage(videoEntity.getHeader(),mContext,vh.ivHeader);
-           //Database.download_image(videoEntity.getHeader(),mContext,vh.ivHeader);
             Log.e("Database",videoEntity.getHeader());
         }
         if(videoEntity.getPostText()!=null && !videoEntity.getPostText().equals("")) {
@@ -74,9 +70,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             vh.tvPostContent.setVisibility(View.VISIBLE);
         }
         if(videoEntity.getCoverUrl()!=null && !videoEntity.getCoverUrl().equals("")){
-            //Picasso.with(mContext).load(videoEntity.getCoverUrl()).into(vh.mThumb);
             Database.download_image(videoEntity.getCoverUrl(),mContext,vh.mThumb);
-            //Log.e("Database",videoEntity.getCoverUrl());
         }
         if(videoEntity.getHeader()!=null && !videoEntity.getHeader().equals("")){
             Database.download_headerImage(videoEntity.getHeader(),mContext,vh.ivHeader);
@@ -139,7 +133,6 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (mOnItemClickListener != null) {
                 View.setOnClickListener(this);
             }
-            //通过tag将ViewHolder和itemView绑定
             View.setTag(this);
         }
         @Override

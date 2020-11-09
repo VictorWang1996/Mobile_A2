@@ -62,9 +62,6 @@ public class Database {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if(!dataSnapshot.exists()){
-//                  User user = dataSnapshot.getValue(User.class);
-//                  Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
-                    //default username is id
                     UserEntity new_user = new UserEntity(user.getUid(),user.getUid(),user.getEmail());
                     update(new_user);
                 }
@@ -90,16 +87,10 @@ public class Database {
 
                 if(!dataSnapshot.exists()){
                     UserEntity temp_user = dataSnapshot.getValue(UserEntity.class);
-//                  Toast.makeText(LogInActivity.this,user.toString(),Toast.LENGTH_SHORT).show();
 
-//                    if(temp_user.postList == null){
-//                        temp_user.postList = new ArrayList<>();
-//                    }
                     temp_user.addPost(post);
                     Log.e("D",String.valueOf(temp_user.postList.size()));
                     Log.e("D",temp_user.toString());
-//                    update(temp_user);
-//                    mFdatabase.child("users").child(temp_user.id).child("postList").child(post.getPostID()).setValue(post);
                 }
                 // ...
             }
@@ -130,7 +121,6 @@ public class Database {
                 if(dataSnapshot.exists()){
                     UserEntity loaduser = dataSnapshot.getValue(UserEntity.class);
                     MeFragment.currentuser = new UserEntity((loaduser));
-//                    Toast.makeText(getActivity(),loadUser.toString(),Toast.LENGTH_SHORT).show();
                     tv_name.setText(MeFragment.currentuser.username);
                     tv_email.setText(MeFragment.currentuser.email);
                     Log.e("Database",MeFragment.currentuser.getHeader());
@@ -195,7 +185,6 @@ public class Database {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-//                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
                 // Handle any errors
             }
         });
@@ -208,7 +197,6 @@ public class Database {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Picasso.with(activity).load(uri).transform(new CircleTransform()).into(image);
-//                Glide.with(activity).load(uri).into(image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -227,7 +215,6 @@ public class Database {
             Toast.makeText(activity,"Please log in.",Toast.LENGTH_SHORT).show();
             return;
         }
-//        Uri file = Uri.fromFile(new File(path));
         if(file == null){
             Toast.makeText(activity,"file not found",Toast.LENGTH_SHORT).show();
             return;
@@ -265,7 +252,6 @@ public class Database {
             Toast.makeText(activity,"Please log in.",Toast.LENGTH_SHORT).show();
             return;
         }
-//        Uri file = Uri.fromFile(new File(path));
         if(file == null){
             Toast.makeText(activity,"file not found",Toast.LENGTH_SHORT).show();
             return;
