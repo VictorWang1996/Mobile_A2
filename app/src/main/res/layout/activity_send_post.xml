@@ -52,7 +52,7 @@
             android:layout_below="@+id/top_bar"
             android:layout_height="match_parent">
             <EditText
-                android:id="@+id/et_content"
+                android:id="@+id/post_et_content"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:hint="share life"
@@ -62,7 +62,7 @@
                 android:paddingLeft="10dp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_editImage"
-                android:layout_below="@+id/et_content"
+                android:layout_below="@+id/post_et_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"

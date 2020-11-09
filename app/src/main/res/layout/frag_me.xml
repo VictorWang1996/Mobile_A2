@@ -34,7 +34,6 @@
             android:background="@color/colorGrey"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -44,7 +43,6 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/user_rl_title"
         android:src="@mipmap/header"/>
-
     <TextView
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -57,7 +55,6 @@
         android:layout_marginTop="15dp"
         android:layout_below="@+id/user_rl_title"        android:layout_marginStart="20dp"
         android:layout_toRightOf="@+id/img_header" />
-
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -66,7 +63,6 @@
         android:layout_marginTop="25dp"
         android:layout_below="@+id/user_rl_title"        android:src="@drawable/edit"
         android:layout_marginLeft="250dp" />
-
     <ImageView
         android:layout_width="33dp"
         android:layout_height="33dp"
@@ -76,7 +72,6 @@
         android:layout_marginTop="15dp"
         android:scaleType="fitXY"
         android:src="@drawable/wodeshoucang"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,8 +106,6 @@
             android:visibility="gone"/>
 
     </LinearLayout>
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,11 +117,22 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/user_recyclerview"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/user_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_postsTitle"/>
+        android:layout_below="@+id/tv_postsTitle">
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_postsTitle"/>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
 
 
 

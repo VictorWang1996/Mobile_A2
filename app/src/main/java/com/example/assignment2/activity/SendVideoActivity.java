@@ -62,13 +62,14 @@ import java.util.TimeZone;
 public class SendVideoActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
     private EmotionInputDetector mDetector;
-    ImageButton send,cancel,btn_emoji,btn_camera,btn_picture,btn_video;
+    ImageButton send,cancel,btn_emoji,btn_camera,btn_picture,btn_video,btn_video_at,btn_video_hash;
     EditText content;
     //ImageView showPicture;
     String currentPhotoPath;
     public static final int TAKE_PHOTO_CODE = 1;
     public static final int SELECT_IMAGE_CODE = 111;
     public static final int REQUEST_VIDEO_CAPTURE = 11;
+    public static final int LOCAL_VIDEO_GET = 222;
     public Uri coverURI;
     public Uri videoURI;
     private List<Note> mNote = EmotionData.getNotes();
@@ -96,9 +97,12 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         btn_camera = findViewById(R.id.btn_camera);
         btn_emoji = findViewById(R.id.btn_emoji);
         btn_picture = findViewById(R.id.btn_picture);
+       // btn_local_video = findViewById(R.id.btn_local_video);
         btn_video = findViewById(R.id.btn_video);
         videoView = findViewById(R.id.videoview);
         ivCoverVideo = findViewById(R.id.coverVideo);
+        btn_video_at = findViewById(R.id.btn_At);
+        btn_video_hash = findViewById(R.id.btn_hash);
 
         // set emoji keyboard
         GridView gridView = findViewById(R.id.grid_emoji_view);
@@ -135,6 +139,9 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         btn_picture.setOnClickListener(this);
         btn_camera.setOnClickListener(this);
         btn_video.setOnClickListener(this);
+        btn_video_hash.setOnClickListener(this);
+        btn_video_at.setOnClickListener(this);
+        //btn_local_video.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -161,6 +168,16 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.btn_video:
                 dispatchTakeVideoIntent();
+                break;
+            case R.id.btn_At:
+                content.setText(content.getText().toString()+"@");
+                break;
+            case R.id.btn_hash:
+                content.setText(content.getText().toString()+"#");
+                break;
+//            case R.id.btn_local_video:
+//                pickVideoFromAlbum();
+//                break;
 
         }
     }
@@ -278,12 +295,22 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
     }
+
+    public void pickVideoFromAlbum() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,"video/*");
+        //intent.setType("video/*");
+        startActivityForResult(intent,LOCAL_VIDEO_GET);
+    }
     public void pickImageFromAlbum() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, SELECT_IMAGE_CODE);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -294,6 +321,10 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                     //showPicture.setImageURI(photoURI);
                     ivCoverVideo.setImageURI(coverURI);
                     ivCoverVideo.setVisibility(View.VISIBLE);
+                    if (videoURI!=null){
+                        videoView.setVisibility(View.VISIBLE);
+                        videoView.seekTo( 1 );
+                    }
                     galleryAddPic();
                 }
                 break;
@@ -302,7 +333,12 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                     coverURI = data.getData();
                     ivCoverVideo.setImageURI(coverURI);
                     ivCoverVideo.setVisibility(View.VISIBLE);
+                    if (videoURI!=null){
+                        videoView.setVisibility(View.VISIBLE);
+                        videoView.seekTo( 1 );
+                    }
                 }
+                break;
             case  REQUEST_VIDEO_CAPTURE:
                 if (resultCode == RESULT_OK){
                     //videoURI = data.getData();
@@ -317,7 +353,22 @@ public class SendVideoActivity extends AppCompatActivity implements View.OnClick
                     videoView.setMediaController(mediaController);
                     mediaController.setAnchorView(videoView);
                 }
-
+                break;
+            case LOCAL_VIDEO_GET:
+                if (resultCode == RESULT_OK && data!=null){
+                    videoURI = data.getData();
+                    videoView.setVideoURI(videoURI);
+                    videoView.setVisibility(View.VISIBLE);
+                    videoView.seekTo( 1 );
+//                    if(coverURI==null){
+//                        Bitmap bm = getVideoThumb(videoURI.getPath());
+//                        coverURI =Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bm, null,null));
+//                    }
+                    MediaController mediaController = new MediaController(this);
+                    videoView.setMediaController(mediaController);
+                    mediaController.setAnchorView(videoView);
+                }
+                break;
             default:
                 break;
         }

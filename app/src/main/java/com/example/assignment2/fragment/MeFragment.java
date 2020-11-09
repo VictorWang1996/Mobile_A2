@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.assignment2.activity.EditProfileActivity;
 import com.example.assignment2.activity.LogInActivity;
 import com.example.assignment2.activity.MainActivity;
+import com.example.assignment2.activity.MyCollectionActivity;
 import com.example.assignment2.adapter.PostAdapter;
 import com.example.assignment2.adapter.UserPostAdapter;
 import com.example.assignment2.entity.PostEntity;
@@ -32,6 +33,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,10 +67,12 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private TextView tv_location;
     private TextView tv_phone;
     private ImageView img_header;
+    private SmartRefreshLayout refreshLayout;
     private ListView lv_posts;
     private UserEntity loadUser;
     private RecyclerView mRecyclerview;
     private ImageView im_signin_out;
+    private ImageView iv_my_collect;
     public static UserEntity currentuser = new UserEntity();
 
     public MeFragment() {
@@ -111,6 +117,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(linearLayoutManager);
+        refreshLayout = view.findViewById(R.id.user_refresh);
+
+        iv_my_collect = view.findViewById(R.id.iv_myCollection);
+        iv_my_collect.setOnClickListener(this);
 
         im_signin_out = view.findViewById(R.id.iv_signin_out);
         im_signin_out.setOnClickListener(this);
@@ -126,12 +136,16 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         tv_phone = view.findViewById(R.id.tv_phone);
         img_header = view.findViewById(R.id.img_header);
         Database.loadCurrentUser(tv_name, tv_sex, tv_age, tv_email, tv_location, tv_phone, img_header,getActivity());
-
-
         Log.e("Me Cur", currentuser.location+currentuser.getHeader());
         loadUserPosts();
-
         Log.e("Me:",currentuser.toString());
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(2000/*,false*/);
+                loadUserPosts();
+            }
+        });
         return view;
     }
 
@@ -217,6 +231,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     startActivity(toSignIn);
                 }
                 return;
+            case R.id.iv_myCollection:
+                Intent toCollection = new Intent(getActivity(), MyCollectionActivity.class);
+                startActivity(toCollection);
+                break;
         }
 
     }

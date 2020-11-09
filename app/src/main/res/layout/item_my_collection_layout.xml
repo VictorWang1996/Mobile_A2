@@ -93,80 +93,80 @@
         android:textColor="#9f9f9f"
         android:textSize="12sp" />
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="39dp">-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="39dp">
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentLeft="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:orientation="horizontal">-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/user_img_comment"-->
-<!--                    android:layout_width="19dp"-->
-<!--                    android:layout_height="19dp"-->
-<!--                    android:src="@mipmap/comment" />-->
+                <ImageView
+                    android:id="@+id/collect_user_img_comment"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:src="@mipmap/comment" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/user_comment"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="3dp"-->
-<!--                    android:text="0"-->
-<!--                    android:textColor="#161616"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
+                <TextView
+                    android:id="@+id/collect_user_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="0"
+                    android:textColor="#161616"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:orientation="horizontal">-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/user_img_collect"-->
-<!--                    android:layout_width="19dp"-->
-<!--                    android:layout_height="19dp"-->
-<!--                    android:src="@mipmap/collect" />-->
+                <ImageView
+                    android:id="@+id/collect_user_img_collect"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:src="@mipmap/collect" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/user_collect"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="3dp"-->
-<!--                    android:text="0"-->
-<!--                    android:textColor="#161616"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
+                <TextView
+                    android:id="@+id/collect_user_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="0"
+                    android:textColor="#161616"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:orientation="horizontal">-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/user_img_like"-->
-<!--                    android:layout_width="19dp"-->
-<!--                    android:layout_height="19dp"-->
-<!--                    android:src="@mipmap/dianzan" />-->
+                <ImageView
+                    android:id="@+id/collect_user_img_like"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:src="@mipmap/dianzan" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/user_like"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="3dp"-->
-<!--                    android:text="0"-->
-<!--                    android:textColor="#161616"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </LinearLayout>-->
-<!--        </RelativeLayout>-->
+                <TextView
+                    android:id="@+id/collect_user_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="0"
+                    android:textColor="#161616"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <View

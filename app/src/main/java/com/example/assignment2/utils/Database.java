@@ -135,7 +135,7 @@ public class Database {
                     tv_email.setText(MeFragment.currentuser.email);
                     Log.e("Database",MeFragment.currentuser.getHeader());
                     if(MeFragment.currentuser.getHeader()!=null&&!MeFragment.currentuser.getHeader().equals("")){
-                        Database.download_image(MeFragment.currentuser.getHeader(),activity,img_header);
+                        Database.download_headerImage(MeFragment.currentuser.getHeader(),activity,img_header);
                         Log.e("Database",MeFragment.currentuser.getHeader());
                     }
                     if(!MeFragment.currentuser.age.equals("") && MeFragment.currentuser.age!=null){
@@ -170,69 +170,6 @@ public class Database {
 
     }
 
-    public static void loadCurrentUser(){
-        {
-            FirebaseUser user = Database.mAuth.getCurrentUser();
-            if(user==null){
-//                Toast.makeText(activity,"Sign in Please",Toast.LENGTH_SHORT).show();
-                return;
-            }
-            ValueEventListener userListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    if(dataSnapshot.exists()){
-                        UserEntity loaduser = dataSnapshot.getValue(UserEntity.class);
-                        MeFragment.currentuser = new UserEntity(loaduser);
-                    }
-                    // ...
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Getting Post failed, log a message
-                    Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
-                    // ...
-                }
-            };
-            Database.mFdatabase.child("users").child(user.getUid()).addListenerForSingleValueEvent(userListener);
-
-        }
-    }
-
-
-
-    public static void loadPosts(){
-//        final FirebaseUser user = mAuth.getCurrentUser();
-        postList = new ArrayList<>();
-        ValueEventListener postsListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()){
-                    //dataSnapshot.getValue() get a hashMap type
-                    //Map<String, Object> map = (Map<String, Object>)dataSnapshot.getValue(Map.class);
-                    GenericTypeIndicator<Map<String, PostEntity>> genericTypeIndicator = new GenericTypeIndicator<Map<String, PostEntity>>() {};
-                    Map<String, PostEntity> map = dataSnapshot.getValue(genericTypeIndicator);
-                    Log.e("Map size", String.valueOf(map.size()));
-                    for(PostEntity key:map.values()){
-                        postList.add(key);
-//                        Log.e("Add", String.valueOf(postList.size()));
-                    }
-                    Log.d("Type:",dataSnapshot.getValue().getClass().toString());
-                }
-                // ...
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("LogIn", "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-        mFdatabase.child("posts").addListenerForSingleValueEvent(postsListener);
-        Log.e(" Post size", String.valueOf(postList.size()));
-    }
 
     public static void update(UserEntity user){
         mFdatabase.child("users").child(user.id).setValue(user);
@@ -258,7 +195,7 @@ public class Database {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
                 // Handle any errors
             }
         });
@@ -271,12 +208,12 @@ public class Database {
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Picasso.with(activity).load(uri).transform(new CircleTransform()).into(image);
-                //Glide.with(activity).load(uri).into(image);
+//                Glide.with(activity).load(uri).into(image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(activity,"load fail",Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity,"Header load fail",Toast.LENGTH_SHORT).show();
                 // Handle any errors
             }
         });

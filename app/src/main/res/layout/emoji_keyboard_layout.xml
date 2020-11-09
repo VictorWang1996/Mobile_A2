@@ -9,32 +9,56 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/colorShadowGrey">
+
         <ImageButton
-            android:id="@+id/btn_picture"
+            android:id="@+id/btn_emoji"
             android:layout_alignParentLeft="true"
             android:layout_height="match_parent"
             android:layout_width="40dp"
-            android:src="@drawable/btn_picture"
-            android:background="@color/colorShadowGrey"
-            android:scaleType="centerInside"
-            android:padding="6dp"
-            />
-        <ImageButton
-            android:id="@+id/btn_emoji"
-            android:layout_toEndOf="@+id/btn_picture"
-            android:layout_height="match_parent"
-            android:layout_width="40dp"
-            android:layout_marginStart="48dp"
             android:src="@drawable/btn_emoji"
             android:background="@color/colorShadowGrey"
             android:scaleType="centerInside"
             android:padding="5dp" />
         <ImageButton
-            android:id="@+id/btn_camera"
+            android:id="@+id/btn_post_at"
             android:layout_toEndOf="@+id/btn_emoji"
             android:layout_height="match_parent"
             android:layout_width="40dp"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/at"
+            android:background="@color/colorShadowGrey"
+            android:scaleType="centerInside"
+            android:padding="6dp"
+            />
+        <ImageButton
+            android:id="@+id/btn_post_hash"
+            android:layout_toEndOf="@+id/btn_post_at"
+            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/hash"
+            android:background="@color/colorShadowGrey"
+            android:scaleType="centerInside"
+            android:padding="6dp"
+            />
+        <ImageButton
+            android:id="@+id/post_btn_picture"
+            android:layout_toEndOf="@+id/btn_post_hash"
+            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/btn_picture"
+            android:background="@color/colorShadowGrey"
+            android:scaleType="centerInside"
+            android:padding="6dp"
+            />
+
+        <ImageButton
+            android:id="@+id/post_btn_camera"
+            android:layout_toEndOf="@+id/post_btn_picture"
+            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_marginStart="50dp"
             android:src="@drawable/btn_camera"
             android:background="@color/colorShadowGrey"
             android:scaleType="centerInside"

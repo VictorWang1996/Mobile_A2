@@ -213,6 +213,13 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     }
                 }
             }
+            if(MeFragment.currentuser.getCollect().size()>0){
+                for(PostEntity post:MeFragment.currentuser.getCollect()){
+                    if(post.getPostID().equals(postID)){
+                        post.setLikeCount(post.getLikeCount()+1);
+                    }
+                }
+            }
         }
         else{
             if(MeFragment.currentuser.getLiked().size()>0){
@@ -220,6 +227,13 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
             if(MeFragment.currentuser.postList.size()>0){
                 for(PostEntity post:MeFragment.currentuser.postList){
+                    if(post.getPostID().equals(postID)){
+                        post.setLikeCount(post.getLikeCount()-1);
+                    }
+                }
+            }
+            if(MeFragment.currentuser.getCollect().size()>0){
+                for(PostEntity post:MeFragment.currentuser.getCollect()){
                     if(post.getPostID().equals(postID)){
                         post.setLikeCount(post.getLikeCount()-1);
                     }

@@ -13,12 +13,6 @@
         android:background="@color/colorWhite"
         android:orientation="horizontal">
         <RadioButton
-        android:id="@+id/rb_search"
-        style="@style/navigation_item"
-        android:drawableTop="@drawable/navi_search"
-        android:text="search"
-            android:layout_marginTop="2dp"/>
-        <RadioButton
             android:id="@+id/rb_video"
             style="@style/navigation_item"
             android:drawableTop="@drawable/navi_search"

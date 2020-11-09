@@ -17,14 +17,12 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Mobile"
+        android:label="WeShare"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MyCollectionActivity"></activity>
         <activity android:name=".activity.EditProfileActivity" />
-        <activity android:name=".imageTest.GridImageActivity" />
-        <activity android:name=".activity.ReadImageActivity" />
         <activity android:name=".activity.SignUpActivity" />
         <activity android:name=".activity.LogInActivity" />
         <activity
@@ -33,7 +31,9 @@
         <activity
             android:name=".activity.SendVideoActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

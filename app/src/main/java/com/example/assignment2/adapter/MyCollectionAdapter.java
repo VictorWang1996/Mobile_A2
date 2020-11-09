@@ -42,9 +42,10 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_post_layout,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_my_collection_layout,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.gridLayout.removeAllViews();
+        Log.e("Posts size",String.valueOf(posts.size()));
         return viewHolder;
     }
 
@@ -52,6 +53,7 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         final PostEntity postEntity = posts.get(position);
+//        Log.e("Posts size",String.valueOf(posts.size()));
         vh.tvAuthor.setText(postEntity.getUserID());
         vh.tvTime.setText(postEntity.getPostTime());
         vh.tvComment.setText(String.valueOf(postEntity.getCommentCount()));
@@ -119,17 +121,17 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private boolean flagLike, flagCollect;
         public ViewHolder(@NonNull View View) {
             super(View);
-            tvAuthor = View.findViewById(R.id.author);
-            tvTime = View.findViewById(R.id.time);
-            tvLike = View.findViewById(R.id.like);
-            tvCollect = View.findViewById(R.id.collect);
-            tvComment= View.findViewById(R.id.comment);
-            tvPostContent = View.findViewById(R.id.postContent);
-            ivHeader = View.findViewById(R.id.img_header);
-            tvLocation= View.findViewById(R.id.location);
-            gridLayout = View.findViewById(R.id.gridlayout_post);
-            ivLike = View.findViewById(R.id.img_like);
-            ivCollect = View.findViewById(R.id.img_collect);
+            tvAuthor = View.findViewById(R.id.collect_user_author);
+            tvTime = View.findViewById(R.id.collect_user_time);
+            tvLike = View.findViewById(R.id.collect_user_like);
+            tvCollect = View.findViewById(R.id.collect_user_collect);
+            tvComment= View.findViewById(R.id.collect_user_comment);
+            tvPostContent = View.findViewById(R.id.collect_user_postContent);
+            ivHeader = View.findViewById(R.id.collect_user_img_header);
+            tvLocation= View.findViewById(R.id.collect_user_location);
+            gridLayout = View.findViewById(R.id.collect_user_gridlayout_post);
+            ivLike = View.findViewById(R.id.collect_user_img_like);
+            ivCollect = View.findViewById(R.id.collect_user_img_collect);
 //            flagCollect = false;
 //            flagLike = false;
             ivLike.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +209,13 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             }
+            if(MeFragment.currentuser.getCollect().size()>0){
+                for(PostEntity post:MeFragment.currentuser.getCollect()){
+                    if(post.getPostID().equals(postID)){
+                        post.setLikeCount(post.getLikeCount()+1);
+                    }
+                }
+            }
         }
         else{
             if(MeFragment.currentuser.getLiked().size()>0){
@@ -214,6 +223,13 @@ public class MyCollectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             if(MeFragment.currentuser.postList.size()>0){
                 for(PostEntity post:MeFragment.currentuser.postList){
+                    if(post.getPostID().equals(postID)){
+                        post.setLikeCount(post.getLikeCount()-1);
+                    }
+                }
+            }
+            if(MeFragment.currentuser.getCollect().size()>0){
+                for(PostEntity post:MeFragment.currentuser.getCollect()){
                     if(post.getPostID().equals(postID)){
                         post.setLikeCount(post.getLikeCount()-1);
                     }

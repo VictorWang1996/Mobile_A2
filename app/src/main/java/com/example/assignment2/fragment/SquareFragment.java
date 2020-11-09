@@ -113,7 +113,9 @@ public class SquareFragment extends Fragment implements View.OnClickListener {
                 filteredList.add(post);
             }
         }
-        postAdapter.filteredList(filteredList);
+        if(filteredList!=null){
+            postAdapter.filteredList(filteredList);
+        }
     }
 
     private void loadPosts(){

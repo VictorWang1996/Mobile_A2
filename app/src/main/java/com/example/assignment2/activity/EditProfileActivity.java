@@ -28,10 +28,12 @@ import com.example.assignment2.entity.PostEntity;
 import com.example.assignment2.entity.UserEntity;
 import com.example.assignment2.fragment.MeFragment;
 import com.example.assignment2.utils.Database;
+import com.example.assignment2.view.CircleTransform;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,7 +82,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         camera.setOnClickListener(this);
 //        UserEntity user = new UserEntity(MeFragment.currentuser);
         if(MeFragment.currentuser.getHeader()!=null&&!MeFragment.currentuser.getHeader().equals("")){
-            Database.download_image(MeFragment.currentuser.getHeader(),EditProfileActivity.this,image);
+            Database.download_headerImage(MeFragment.currentuser.getHeader(),EditProfileActivity.this,image);
 
         }
         name.setText(MeFragment.currentuser.username);
@@ -157,8 +159,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     public void addImage(){
+        Picasso.with(EditProfileActivity.this).load(imguri).transform(new CircleTransform()).into(image);
 
-        image.setImageURI(imguri);
+//        image.setImageURI(imguri);
     }
 
     @Override

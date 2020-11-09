@@ -75,7 +75,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
         if(videoEntity.getCoverUrl()!=null && !videoEntity.getCoverUrl().equals("")){
             //Picasso.with(mContext).load(videoEntity.getCoverUrl()).into(vh.mThumb);
-            Database.download_image(videoEntity.getCoverUrl(),mContext,vh.ivHeader);
+            Database.download_image(videoEntity.getCoverUrl(),mContext,vh.mThumb);
             //Log.e("Database",videoEntity.getCoverUrl());
         }
         if(videoEntity.getHeader()!=null && !videoEntity.getHeader().equals("")){
@@ -92,7 +92,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(mContext,"load fail",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,"Video load fail",Toast.LENGTH_SHORT).show();
                     // Handle any errors
                 }
             });

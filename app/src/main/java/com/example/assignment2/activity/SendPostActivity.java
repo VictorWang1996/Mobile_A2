@@ -64,7 +64,7 @@ import java.util.TimeZone;
 public class SendPostActivity extends AppCompatActivity implements View.OnClickListener, LocationListener {
 
     private EmotionInputDetector mDetector;
-    ImageButton send,cancel,btn_emoji,btn_camera,btn_picture;
+    ImageButton send,cancel,btn_emoji,btn_camera,btn_picture,btn_at,btn_hash;
     EditText content;
     //ImageView showPicture;
     String currentPhotoPath;
@@ -95,11 +95,13 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
     private void init(){
         send = findViewById(R.id.btn_send);
         cancel = findViewById(R.id.btn_cancel);
-        content = findViewById(R.id.et_content);
-        btn_camera = findViewById(R.id.btn_camera);
+        content = findViewById(R.id.post_et_content);
+        btn_camera = findViewById(R.id.post_btn_camera);
         btn_emoji = findViewById(R.id.btn_emoji);
-        btn_picture = findViewById(R.id.btn_picture);
+        btn_picture = findViewById(R.id.post_btn_picture);
         mRvEditImage = findViewById(R.id.rv_editImage);
+        btn_at = findViewById(R.id.btn_post_at);
+        btn_hash = findViewById(R.id.btn_post_hash);
         gridLayoutManager = new GridLayoutManager(SendPostActivity.this,3);
         mRvEditImage.setLayoutManager(gridLayoutManager);
         imageUris = new ArrayList<>();
@@ -162,6 +164,8 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
         cancel.setOnClickListener(this);
         btn_picture.setOnClickListener(this);
         btn_camera.setOnClickListener(this);
+        btn_at.setOnClickListener(this);
+        btn_hash.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -186,6 +190,12 @@ public class SendPostActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_picture:
                 pickImageFromAlbum();
+                break;
+            case R.id.btn_post_at:
+                content.setText(content.getText().toString()+"@");
+                break;
+            case R.id.btn_post_hash:
+                content.setText(content.getText().toString()+"#");
                 break;
         }
     }
